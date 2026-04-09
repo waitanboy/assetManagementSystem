@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assetmanagement.backend.mapper.NoticeMapper">
+
+    <select id="findAll" resultType="com.assetmanagement.backend.entity.Notice">
+        SELECT n.*, u.email as authorEmail
+        FROM notice n
+        JOIN users u ON n.author_id = u.id
+        ORDER BY n.created_at DESC
+    </select>
+
+    <select id="findById" resultType="com.assetmanagement.backend.entity.Notice">
+        SELECT n.*, u.email as authorEmail
+        FROM notice n
+        JOIN users u ON n.author_id = u.id
+        WHERE n.id = #{id}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO notice (title, content, author_id)
+        VALUES (#{title}, #{content}, #{authorId})
+    </insert>
+
+    <update id="update">
+        UPDATE notice
+        SET 
+            title = #{title},
+            content = #{content},
+            updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM notice WHERE id = #{id}
+    </delete>
+
+</mapper>

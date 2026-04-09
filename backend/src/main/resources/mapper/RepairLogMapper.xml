@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assetmanagement.backend.mapper.RepairLogMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO repair_log (asset_id, reported_by, reason, estimated_cost, status)
+        VALUES (#{assetId}, #{reportedBy}, #{reason}, #{estimatedCost}, #{status})
+    </insert>
+
+    <update id="update">
+        UPDATE repair_log
+        SET final_cost = #{finalCost},
+            status = #{status},
+            end_date = #{endDate}
+        WHERE id = #{id}
+    </update>
+
+    <select id="findById" resultType="com.assetmanagement.backend.entity.RepairLog">
+        SELECT * FROM repair_log WHERE id = #{id}
+    </select>
+
+    <select id="findActiveRepairByAssetId" resultType="com.assetmanagement.backend.entity.RepairLog">
+        SELECT * FROM repair_log 
+        WHERE asset_id = #{assetId} AND status = 'IN_PROGRESS'
+        ORDER BY start_date DESC 
+        LIMIT 1
+    </select>
+
+    <select id="findByAssetId" resultType="com.assetmanagement.backend.entity.RepairLog">
+        SELECT * FROM repair_log 
+        WHERE asset_id = #{assetId}
+        ORDER BY start_date DESC
+    </select>
+
+    <select id="findAllRepairs" resultType="com.assetmanagement.backend.entity.RepairLog">
+        SELECT * FROM repair_log 
+        ORDER BY start_date DESC
+    </select>
+
+</mapper>

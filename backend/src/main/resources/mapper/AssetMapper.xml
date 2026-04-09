@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assetmanagement.backend.mapper.AssetMapper">
+
+    <select id="findAll" resultType="com.assetmanagement.backend.entity.Asset">
+        SELECT a.*,
+               u.email      AS rentedByEmail,
+               u.department AS rentedByDepartment,
+               t.user_id    AS rentedByUserId,
+               t.due_date   AS dueDate
+        FROM asset a
+        LEFT JOIN (
+            SELECT asset_id, MAX(id) AS latest_tx_id
+            FROM `transaction`
+            WHERE type = 'RENT'
+            GROUP BY asset_id
+        ) latest ON a.id = latest.asset_id AND a.status = 'RENTED'
+        LEFT JOIN `transaction` t ON t.id = latest.latest_tx_id
+        LEFT JOIN users u ON t.user_id = u.id
+        <where>
+            a.use_yn = 'Y'
+            <if test="search != null and search != ''">
+                AND (a.name LIKE CONCAT('%', #{search}, '%') OR a.serial_number LIKE CONCAT('%', #{search}, '%'))
+            </if>
+            <if test="status != null and status != ''">
+                AND a.status = #{status}
+            </if>
+        </where>
+    </select>
+
+    <select id="findById" resultType="com.assetmanagement.backend.entity.Asset">
+        SELECT * FROM asset WHERE id = #{id} AND use_yn = 'Y'
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO asset (category_id, name, serial_number, status, location, image_url, use_yn)
+        VALUES (#{categoryId}, #{name}, #{serialNumber}, #{status}, #{location}, #{imageUrl}, 'Y')
+    </insert>
+
+    <insert id="insertBulk" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO asset (category_id, name, serial_number, status, location, image_url, use_yn)
+        VALUES 
+        <foreach collection="assets" item="asset" separator=",">
+            (#{asset.categoryId}, #{asset.name}, #{asset.serialNumber}, #{asset.status}, #{asset.location}, #{asset.imageUrl}, 'Y')
+        </foreach>
+    </insert>
+
+    <update id="update">
+        UPDATE asset
+        SET category_id = #{categoryId},
+            name = #{name},
+            status = #{status},
+            location = #{location},
+            image_url = #{imageUrl}
+        WHERE id = #{id}
+    </update>
+
+    <update id="delete">
+        UPDATE asset SET use_yn = 'N' WHERE id = #{id}
+    </update>
+
+    <select id="getAssetStats" resultType="map">
+        SELECT 
+            COUNT(*) as total,
+            SUM(CASE WHEN status = 'AVAILABLE' THEN 1 ELSE 0 END) as available,
+            SUM(CASE WHEN status = 'RENTED' THEN 1 ELSE 0 END) as rented,
+            SUM(CASE WHEN status = 'REPAIRING' THEN 1 ELSE 0 END) as repairing
+        FROM asset
+        WHERE use_yn = 'Y'
+    </select>
+
+    <select id="findMyRentedAssets" resultType="com.assetmanagement.backend.entity.Asset">
+        SELECT a.*, t.due_date as dueDate
+        FROM asset a
+        JOIN (
+            SELECT asset_id, MAX(id) as latest_tx_id 
+            FROM `transaction` 
+            WHERE type = 'RENT'
+            GROUP BY asset_id
+        ) latest ON a.id = latest.asset_id
+        JOIN `transaction` t ON t.id = latest.latest_tx_id
+        WHERE t.user_id = #{userId} AND t.type = 'RENT' AND a.status = 'RENTED' AND a.use_yn = 'Y'
+    </select>
+
+</mapper>

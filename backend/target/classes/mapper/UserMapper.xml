@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assetmanagement.backend.mapper.UserMapper">
+
+    <select id="findByEmail" resultType="com.assetmanagement.backend.entity.User">
+        SELECT * FROM users WHERE email = #{email}
+    </select>
+
+    <select id="findById" resultType="com.assetmanagement.backend.entity.User">
+        SELECT * FROM users WHERE id = #{id}
+    </select>
+
+    <select id="findAll" resultType="com.assetmanagement.backend.entity.User">
+        SELECT id, email, role, department, status FROM users
+    </select>
+
+    <select id="findApproved" resultType="com.assetmanagement.backend.entity.User">
+        SELECT id, email, role, department, status FROM users
+        WHERE status = 'APPROVED'
+        ORDER BY email
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO users (email, password, role, department, status)
+        VALUES (#{email}, #{password}, #{role}, #{department}, #{status})
+    </insert>
+
+    <update id="update">
+        UPDATE users
+        SET email = #{email},
+            role = #{role},
+            department = #{department},
+            status = #{status}
+        <if test="password != null and password != ''">
+            , password = #{password}
+        </if>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM users WHERE id = #{id}
+    </delete>
+
+</mapper>
