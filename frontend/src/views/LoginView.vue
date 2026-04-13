@@ -2,7 +2,15 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/authStore'
-import { Lock, Mail, Loader2, Building, Package } from 'lucide-vue-next'
+import { Lock, Mail, Loader2, Building, Package, ChevronDown } from 'lucide-vue-next'
+import { useDepartmentStore } from '../stores/departmentStore'
+import { onMounted } from 'vue'
+
+const departmentStore = useDepartmentStore()
+
+onMounted(() => {
+  departmentStore.fetchDepartments()
+})
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -10,6 +18,7 @@ const authStore = useAuthStore()
 const mode = ref<'login' | 'signup'>('login')
 const email = ref('')
 const password = ref('')
+const name = ref('')
 const department = ref('')
 const loading = ref(false)
 const error = ref('')
@@ -31,6 +40,7 @@ const handleSubmit = async () => {
       await authStore.signup({ 
         email: email.value, 
         password: password.value, 
+        name: name.value,
         department: department.value 
       })
       success.value = 'Sign up successful! Please wait for admin approval.'
@@ -120,17 +130,40 @@ const handleSubmit = async () => {
             </div>
 
             <div v-if="mode === 'signup'">
+              <label class="block text-sm font-semibold text-gray-700 mb-1.5">Full Name</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-gray-400 pointer-events-none">
+                  <span class="text-lg">👤</span>
+                </span>
+                <input
+                  v-model="name"
+                  type="text"
+                  required
+                  class="block w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white outline-none transition-all text-sm"
+                  placeholder="John Doe"
+                />
+              </div>
+            </div>
+
+            <div v-if="mode === 'signup'">
               <label class="block text-sm font-semibold text-gray-700 mb-1.5">Department</label>
               <div class="relative">
                 <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-gray-400 pointer-events-none">
                   <Building class="w-4.5 h-4.5" />
                 </span>
-                <input
+                <select
                   v-model="department"
-                  type="text"
-                  class="block w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white outline-none transition-all text-sm"
-                  placeholder="Marketing, IT, etc."
-                />
+                  required
+                  class="block w-full pl-10 pr-10 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white outline-none transition-all text-sm appearance-none cursor-pointer"
+                >
+                  <option value="" disabled>Select your department</option>
+                  <option v-for="dept in departmentStore.departments" :key="dept.id" :value="dept.name">
+                    {{ dept.name }}
+                  </option>
+                </select>
+                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
+                  <ChevronDown class="w-4 h-4" />
+                </div>
               </div>
             </div>
 

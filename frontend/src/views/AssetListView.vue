@@ -6,11 +6,14 @@ import { useAuthStore } from '../stores/authStore'
 import { useCategoryStore } from '../stores/categoryStore'
 import AssetFormModal from '../components/assets/AssetFormModal.vue'
 import TransactionModal from '../components/assets/TransactionModal.vue'
+import RentalRequestModal from '../components/assets/RentalRequestModal.vue'
+
 const assetStore = useAssetStore()
 const authStore = useAuthStore()
 const categoryStore = useCategoryStore()
 const showModal = ref(false)
 const showTransactionModal = ref(false)
+const showRequestModal = ref(false)
 const searchQuery = ref('')
 const selectedStatus = ref('')
 const selectedAsset = ref<Asset | null>(null)
@@ -44,8 +47,12 @@ const openEditModal = (asset: Asset) => {
 
 const openRentModal = (asset: Asset) => {
   selectedAsset.value = asset
-  transactionType.value = 'RENT'
-  showTransactionModal.value = true
+  if (authStore.isAdmin) {
+    transactionType.value = 'RENT'
+    showTransactionModal.value = true
+  } else {
+    showRequestModal.value = true
+  }
 }
 
 const openReturnModal = (asset: Asset) => {
@@ -65,6 +72,7 @@ const getStatusClass = (status: string) => {
     case 'AVAILABLE': return 'bg-green-50 text-green-700 border-green-200'
     case 'RENTED': return 'bg-orange-50 text-orange-700 border-orange-200'
     case 'REPAIRING': return 'bg-red-50 text-red-700 border-red-200'
+    case 'REQUESTED': return 'bg-purple-50 text-purple-700 border-purple-200'
     default: return 'bg-gray-50 text-gray-700 border-gray-200'
   }
 }
@@ -298,8 +306,14 @@ const handleFileUpload = (event: Event) => {
                   <template v-if="asset.status === 'AVAILABLE'">
                     <button @click="openRentModal(asset)" class="flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white hover:bg-blue-700 text-[11px] font-bold rounded-lg shadow-sm transition-all active:scale-95">
                       <ArrowUpRight class="w-3.5 h-3.5" />
-                      <span>Rent</span>
+                      <span>{{ authStore.isAdmin ? 'Rent' : 'Request' }}</span>
                     </button>
+                  </template>
+                  <template v-else-if="asset.status === 'REQUESTED'">
+                    <span class="flex items-center gap-1 px-3 py-1.5 bg-purple-50 text-purple-500 text-[11px] font-bold rounded-lg border border-purple-100 select-none">
+                      <Clock class="w-3.5 h-3.5" />
+                      <span>신청중</span>
+                    </span>
                   </template>
                   <template v-else-if="asset.status === 'RENTED'">
                     <!-- Admin: 모든 자산 반납 가능 / 일반 유저: 본인 대여분만 반납 가능 -->
@@ -339,5 +353,6 @@ const handleFileUpload = (event: Event) => {
     <!-- Modals -->
     <AssetFormModal v-if="showModal" :asset="selectedAsset" @close="showModal = false" />
     <TransactionModal v-if="showTransactionModal" :asset="selectedAsset!" :type="transactionType" @close="showTransactionModal = false" />
+    <RentalRequestModal v-if="showRequestModal" :asset="selectedAsset!" @close="showRequestModal = false" />
   </div>
 </template>

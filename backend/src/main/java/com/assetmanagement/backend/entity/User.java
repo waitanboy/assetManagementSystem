@@ -22,6 +22,10 @@ public class User {
     
     @NotBlank(message = "Password is required")
     private String password;
+
+    @NotBlank(message = "Name is required")
+    @Size(max = 100, message = "Name must be less than 100 characters")
+    private String name;
     
     @NotBlank(message = "Role is required")
     private String role; // ADMIN, USER

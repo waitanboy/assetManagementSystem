@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { Bell, User, LogOut, ChevronDown, Mail, Shield, UserCircle } from 'lucide-vue-next'
+import { Bell, User, LogOut, ChevronDown, Mail, Shield, UserCircle, Menu } from 'lucide-vue-next'
 import { useAuthStore } from '../../stores/authStore'
 import { useNotificationStore } from '../../stores/notificationStore'
 
@@ -50,12 +50,20 @@ const handleLogout = async () => {
   await authStore.logout()
   router.push('/login')
 }
+
+defineEmits(['toggle-sidebar'])
 </script>
 
 <template>
-  <header class="flex h-16 items-center justify-between border-b bg-white/80 backdrop-blur-md sticky top-0 z-30 px-6">
-    <div class="flex items-center">
-      <h1 class="text-xl font-bold bg-gradient-to-r from-gray-800 to-gray-500 bg-clip-text text-transparent capitalize">
+  <header class="flex h-16 items-center justify-between border-b bg-white/80 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-6">
+    <div class="flex items-center gap-4">
+      <button 
+        @click="$emit('toggle-sidebar')"
+        class="lg:hidden p-2 text-gray-500 hover:bg-gray-100 rounded-xl transition-colors"
+      >
+        <Menu class="w-6 h-6" />
+      </button>
+      <h1 class="text-lg sm:text-xl font-bold bg-gradient-to-r from-gray-800 to-gray-500 bg-clip-text text-transparent capitalize truncate max-w-[150px] sm:max-w-none">
         {{ $route.name }}
       </h1>
     </div>
@@ -194,7 +202,16 @@ const handleLogout = async () => {
             </div>
 
             <!-- Footer Section -->
-            <div class="p-4 bg-gray-50/50">
+            <div class="p-4 bg-gray-50/50 space-y-2">
+              <router-link 
+                to="/profile"
+                @click="isMenuOpen = false"
+                class="w-full flex items-center justify-center space-x-2 p-3 bg-white hover:bg-blue-50 text-gray-700 hover:text-blue-600 rounded-xl border border-gray-200 hover:border-blue-100 transition-all shadow-sm"
+              >
+                <UserCircle class="w-4 h-4" />
+                <span class="text-sm font-semibold">My Account Profile</span>
+              </router-link>
+
               <button 
                 @click="handleLogout"
                 class="w-full flex items-center justify-center space-x-2 p-3 bg-white hover:bg-red-50 text-gray-700 hover:text-red-600 rounded-xl border border-gray-200 hover:border-red-100 transition-all shadow-sm"

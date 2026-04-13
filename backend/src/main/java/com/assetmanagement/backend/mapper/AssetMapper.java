@@ -15,4 +15,5 @@ public interface AssetMapper {
     void delete(Long id);
     java.util.Map<String, Object> getAssetStats();
     List<Asset> findMyRentedAssets(@Param("userId") Long userId);
+    int countByCategoryId(Long categoryId);
 }

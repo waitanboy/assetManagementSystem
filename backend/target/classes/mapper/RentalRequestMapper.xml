@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.assetmanagement.backend.mapper.RentalRequestMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO rental_request (asset_id, user_id, request_date, planned_due_date, purpose, status)
+        VALUES (#{assetId}, #{userId}, #{requestDate}, #{plannedDueDate}, #{purpose}, #{status})
+    </insert>
+
+    <select id="findById" resultType="com.assetmanagement.backend.entity.RentalRequest">
+        SELECT r.*, a.name as assetName, a.serial_number as assetSerial, u.email as userEmail, u.name as userName, u.department as userDepartment, p.email as processedByEmail, c.use_ocr as useOcr
+        FROM rental_request r
+        JOIN asset a ON r.asset_id = a.id
+        JOIN category c ON a.category_id = c.id
+        JOIN users u ON r.user_id = u.id
+        LEFT JOIN users p ON r.processed_by = p.id
+        WHERE r.id = #{id}
+    </select>
+
+    <select id="findByStatus" resultType="com.assetmanagement.backend.entity.RentalRequest">
+        SELECT r.*, a.name as assetName, a.serial_number as assetSerial, u.email as userEmail, u.name as userName, u.department as userDepartment, c.use_ocr as useOcr
+        FROM rental_request r
+        JOIN asset a ON r.asset_id = a.id
+        JOIN category c ON a.category_id = c.id
+        JOIN users u ON r.user_id = u.id
+        WHERE r.status = #{status}
+        ORDER BY r.request_date DESC
+    </select>
+
+    <select id="findByUserId" resultType="com.assetmanagement.backend.entity.RentalRequest">
+        SELECT r.*, a.name as assetName, a.serial_number as assetSerial, u.email as userEmail, u.department as userDepartment
+        FROM rental_request r
+        JOIN asset a ON r.asset_id = a.id
+        JOIN users u ON r.user_id = u.id
+        WHERE r.user_id = #{userId}
+        ORDER BY r.request_date DESC
+    </select>
+
+    <select id="findAll" resultType="com.assetmanagement.backend.entity.RentalRequest">
+        SELECT r.*, a.name as assetName, a.serial_number as assetSerial, u.email as userEmail, u.name as userName, u.department as userDepartment, p.email as processedByEmail, c.use_ocr as useOcr
+        FROM rental_request r
+        JOIN asset a ON r.asset_id = a.id
+        JOIN category c ON a.category_id = c.id
+        JOIN users u ON r.user_id = u.id
+        LEFT JOIN users p ON r.processed_by = p.id
+        ORDER BY r.request_date DESC
+    </select>
+
+    <update id="updateStatus">
+        UPDATE rental_request
+        SET status = #{status},
+            processed_by = #{processedBy},
+            process_date = #{processDate},
+            reject_reason = #{rejectReason},
+            ocr_data = #{ocrData}
+        WHERE id = #{id}
+    </update>
+
+</mapper>

@@ -14,23 +14,24 @@
     </select>
 
     <select id="findAll" resultType="com.assetmanagement.backend.entity.User">
-        SELECT id, email, role, department, status FROM users
+        SELECT id, email, name, role, department, status FROM users
     </select>
 
     <select id="findApproved" resultType="com.assetmanagement.backend.entity.User">
-        SELECT id, email, role, department, status FROM users
+        SELECT id, email, name, role, department, status FROM users
         WHERE status = 'APPROVED'
         ORDER BY email
     </select>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO users (email, password, role, department, status)
-        VALUES (#{email}, #{password}, #{role}, #{department}, #{status})
+        INSERT INTO users (email, password, name, role, department, status)
+        VALUES (#{email}, #{password}, #{name}, #{role}, #{department}, #{status})
     </insert>
 
     <update id="update">
         UPDATE users
         SET email = #{email},
+            name = #{name},
             role = #{role},
             department = #{department},
             status = #{status}

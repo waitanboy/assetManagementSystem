@@ -85,4 +85,7 @@
         WHERE t.user_id = #{userId} AND t.type = 'RENT' AND a.status = 'RENTED' AND a.use_yn = 'Y'
     </select>
 
+    <select id="countByCategoryId" resultType="int">
+        SELECT COUNT(*) FROM asset WHERE category_id = #{categoryId}
+    </select>
 </mapper>

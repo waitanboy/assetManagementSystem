@@ -4,6 +4,7 @@ import { X, Calendar } from 'lucide-vue-next'
 import { useAssetStore, type Asset } from '../../stores/assetStore'
 import { useUserStore } from '../../stores/userStore'
 import { useAuthStore } from '../../stores/authStore'
+import SignaturePad from '../common/SignaturePad.vue'
 
 const props = defineProps<{
   asset: Asset
@@ -18,6 +19,7 @@ const authStore = useAuthStore()
 const userId = ref<number | null>(null)
 const note = ref('')
 const dueDate = ref('')
+const signatureData = ref<string | null>(null)
 const loading = ref(false)
 
 // 오늘 날짜 (min 속성용)
@@ -49,9 +51,9 @@ const handleSubmit = async () => {
   try {
     const targetUserId = userId.value || authStore.id!
     if (props.type === 'RENT') {
-      await assetStore.rentAsset(props.asset.id!, targetUserId, note.value, dueDate.value)
+      await assetStore.rentAsset(props.asset.id!, targetUserId, note.value, dueDate.value, signatureData.value || '')
     } else {
-      await assetStore.returnAsset(props.asset.id!, targetUserId, note.value)
+      await assetStore.returnAsset(props.asset.id!, targetUserId, note.value, signatureData.value || '')
     }
     emit('close')
   } catch (error) {
@@ -129,6 +131,12 @@ const handleSubmit = async () => {
             class="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all resize-none"
           ></textarea>
         </div>
+
+        <!-- Signature Pad -->
+        <div class="space-y-1.5 pb-2">
+          <label class="text-sm font-semibold text-gray-600 ml-1">확인 서명 <span class="text-red-500">*</span></label>
+          <SignaturePad @change="(data) => signatureData = data" />
+        </div>
       </div>
 
       <div class="px-6 py-4 bg-gray-50 border-t border-gray-100 flex items-center justify-end space-x-3">
@@ -140,7 +148,7 @@ const handleSubmit = async () => {
         </button>
         <button
           @click="handleSubmit"
-          :disabled="loading || (type === 'RENT' && (!userId || !dueDate))"
+          :disabled="loading || (type === 'RENT' && (!userId || !dueDate)) || !signatureData"
           class="px-6 py-2 bg-slate-900 text-white text-sm font-semibold rounded-xl hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
         >
           {{ loading ? '처리 중...' : (type === 'RENT' ? '대여 확정' : '반납 처리') }}

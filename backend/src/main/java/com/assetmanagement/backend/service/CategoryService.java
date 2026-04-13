@@ -2,6 +2,7 @@ package com.assetmanagement.backend.service;
 
 import com.assetmanagement.backend.entity.Category;
 import com.assetmanagement.backend.entity.Transaction;
+import com.assetmanagement.backend.mapper.AssetMapper;
 import com.assetmanagement.backend.mapper.CategoryMapper;
 import com.assetmanagement.backend.mapper.TransactionMapper;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.Objects;
 public class CategoryService {
 
     private final CategoryMapper categoryMapper;
+    private final AssetMapper assetMapper;
     private final TransactionMapper transactionMapper;
     private final UserService userService;
 
@@ -53,6 +55,11 @@ public class CategoryService {
     public void deleteCategory(Long id) {
         Category category = categoryMapper.findById(id);
         if (category != null) {
+            // Check if there are assets associated with this category
+            int assetCount = assetMapper.countByCategoryId(id);
+            if (assetCount > 0) {
+                throw new RuntimeException("삭제하려는 카테고리에 연결된 자산이 " + assetCount + "개 존재합니다. 먼저 자산을 삭제하거나 카테고리를 변경해주세요.");
+            }
             categoryMapper.delete(id);
             logActivity(null, "DELETE", "Category deleted: " + category.getName());
         }

@@ -13,6 +13,7 @@ export interface Transaction {
   userEmail: string
   userRole: string
   userDepartment?: string | null
+  signatureData?: string | null
 }
 
 export const useTransactionStore = defineStore('transaction', {

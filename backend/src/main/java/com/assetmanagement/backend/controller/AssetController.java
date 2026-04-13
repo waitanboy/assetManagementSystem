@@ -80,13 +80,13 @@ public class AssetController {
 
     @PostMapping("/{id}/rent")
     public ResponseEntity<Void> rentAsset(@PathVariable Long id, @Valid @RequestBody TransactionRequest request) {
-        assetService.rentAsset(id, request.getUserId(), request.getNote(), request.getDueDate());
+        assetService.rentAsset(id, request.getUserId(), request.getNote(), request.getDueDate(), request.getSignatureData(), request.getOcrData());
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/{id}/return")
     public ResponseEntity<Void> returnAsset(@PathVariable Long id, @Valid @RequestBody TransactionRequest request) {
-        assetService.returnAsset(id, request.getUserId(), request.getNote());
+        assetService.returnAsset(id, request.getUserId(), request.getNote(), request.getSignatureData());
         return ResponseEntity.ok().build();
     }
 

@@ -6,7 +6,7 @@ export interface Asset {
   categoryId: number
   name: string
   serialNumber: string
-  status: 'AVAILABLE' | 'RENTED' | 'REPAIRING'
+  status: 'AVAILABLE' | 'RENTED' | 'REPAIRING' | 'REQUESTED'
   location?: string
   imageUrl?: string
   dueDate?: string // ISO date string (YYYY-MM-DD), 대여 중일 때만 포함

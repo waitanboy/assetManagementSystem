@@ -4,6 +4,7 @@ import api from '../api'
 export interface Category {
   id?: number
   name: string
+  useOcr: boolean
 }
 
 export const useCategoryStore = defineStore('category', {
@@ -26,20 +27,23 @@ export const useCategoryStore = defineStore('category', {
       }
     },
 
-    async addCategory(name: string) {
+    async addCategory(name: string, useOcr: boolean = false) {
       try {
-        const response = await api.post<Category>('/categories', { name })
+        const response = await api.post<Category>('/categories', { name, useOcr })
         this.categories.push(response.data)
       } catch (err: any) {
         throw err
       }
     },
 
-    async updateCategory(id: number, name: string) {
+    async updateCategory(id: number, name: string, useOcr: boolean) {
       try {
-        await api.put(`/categories/${id}`, { name })
+        await api.put(`/categories/${id}`, { name, useOcr })
         const category = this.categories.find(c => c.id === id)
-        if (category) category.name = name
+        if (category) {
+          category.name = name
+          category.useOcr = useOcr
+        }
       } catch (err: any) {
         throw err
       }

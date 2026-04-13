@@ -22,6 +22,7 @@ public class AssetService {
     private final TransactionMapper transactionMapper;
     private final RepairLogMapper repairLogMapper;
     private final UserService userService;
+    private final EmailService emailService;
 
     @Transactional(readOnly = true)
     public List<Asset> getAllAssets(String search, String status) {
@@ -88,12 +89,12 @@ public class AssetService {
     }
 
     @Transactional
-    public void rentAsset(Long assetId, Long userId, String note, java.time.LocalDate dueDate) {
+    public void rentAsset(Long assetId, Long userId, String note, java.time.LocalDate dueDate, String signatureData, String ocrData) {
         Asset asset = assetMapper.findById(assetId);
         if (asset == null) {
             throw new RuntimeException("Asset not found");
         }
-        if (!"AVAILABLE".equals(asset.getStatus())) {
+        if (!"AVAILABLE".equals(asset.getStatus()) && !"REQUESTED".equals(asset.getStatus())) {
             throw new RuntimeException("Asset is currently " + asset.getStatus() + " and cannot be rented");
         }
 
@@ -108,8 +109,21 @@ public class AssetService {
                 .type("RENT")
                 .dueDate(dueDate)
                 .note(note)
+                .signatureData(signatureData)
+                .ocrData(ocrData)
                 .build();
         transactionMapper.insert(transaction);
+
+        // Send confirmation email
+        try {
+            com.assetmanagement.backend.entity.User user = userService.getUserById(userId);
+            if (user != null && user.getEmail() != null) {
+                String dateStr = dueDate != null ? dueDate.toString() : "미지정";
+                emailService.sendRentalConfirmation(user.getEmail(), asset.getName(), dateStr);
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to trigger rental email: " + e.getMessage());
+        }
     }
 
     @Transactional
@@ -138,7 +152,7 @@ public class AssetService {
     }
 
     @Transactional
-    public void returnAsset(Long assetId, Long userId, String note) {
+    public void returnAsset(Long assetId, Long userId, String note, String signatureData) {
         Asset asset = assetMapper.findById(assetId);
         if (asset == null) {
             throw new RuntimeException("Asset not found");
@@ -157,6 +171,7 @@ public class AssetService {
                 .userId(userId) // The subject who returns the asset
                 .type("RETURN")
                 .note(note)
+                .signatureData(signatureData)
                 .build();
         transactionMapper.insert(transaction);
     }

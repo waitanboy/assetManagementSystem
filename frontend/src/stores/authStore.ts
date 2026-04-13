@@ -4,7 +4,9 @@ import api from '../api'
 interface UserState {
   id: number | null
   email: string | null
+  name: string | null
   role: string | null
+  department: string | null
   isAuthenticated: boolean
   initialized: boolean
 }
@@ -13,7 +15,9 @@ export const useAuthStore = defineStore('auth', {
   state: (): UserState => ({
     id: null,
     email: null,
+    name: null,
     role: null,
+    department: null,
     isAuthenticated: false,
     initialized: false,
   }),
@@ -38,7 +42,9 @@ export const useAuthStore = defineStore('auth', {
         const response = await api.post('/auth/login', credentials)
         this.id = response.data.id
         this.email = response.data.email
+        this.name = response.data.name
         this.role = response.data.role
+        this.department = response.data.department
         this.isAuthenticated = true
         return true
       } catch (error) {
@@ -53,7 +59,9 @@ export const useAuthStore = defineStore('auth', {
         if (response.data) {
           this.id = response.data.id
           this.email = response.data.email
+          this.name = response.data.name
           this.role = response.data.role
+          this.department = response.data.department
           this.isAuthenticated = true
           return true
         }
@@ -78,5 +86,17 @@ export const useAuthStore = defineStore('auth', {
         console.error('Logout failed', error)
       }
     },
+    
+    async updateProfile(profileData: any) {
+      try {
+        await api.put('/users/profile', profileData)
+        if (profileData.email) this.email = profileData.email
+        if (profileData.name) this.name = profileData.name
+        if (profileData.department) this.department = profileData.department
+        return true
+      } catch (error) {
+        throw error
+      }
+    }
   },
 })

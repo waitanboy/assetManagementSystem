@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.assetmanagement.backend.mapper.DepartmentMapper">
+
+    <select id="findAll" resultType="com.assetmanagement.backend.entity.Department">
+        SELECT * FROM department ORDER BY id ASC
+    </select>
+
+    <select id="findById" resultType="com.assetmanagement.backend.entity.Department">
+        SELECT * FROM department WHERE id = #{id}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO department (name)
+        VALUES (#{name})
+    </insert>
+
+    <update id="update">
+        UPDATE department
+        SET name = #{name}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM department WHERE id = #{id}
+    </delete>
+
+</mapper>

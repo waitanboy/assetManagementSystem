@@ -6,8 +6,8 @@
 <mapper namespace="com.assetmanagement.backend.mapper.TransactionMapper">
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO transaction (asset_id, user_id, type, transaction_date, due_date, note)
-        VALUES (#{assetId}, #{userId}, #{type}, NOW(), #{dueDate}, #{note})
+        INSERT INTO transaction (asset_id, user_id, type, transaction_date, due_date, note, signature_data, ocr_data)
+        VALUES (#{assetId}, #{userId}, #{type}, NOW(), #{dueDate}, #{note}, #{signatureData}, #{ocrData})
     </insert>
 
     <select id="findRecent" resultType="com.assetmanagement.backend.entity.Transaction">

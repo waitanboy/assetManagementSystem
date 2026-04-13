@@ -4,6 +4,7 @@ import api from '../api'
 export interface User {
   id: number
   email: string
+  name: string
   role: string
   department?: string
   status?: string

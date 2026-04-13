@@ -293,6 +293,15 @@ const getStatusBadgeClass = (type: string) => {
                   <p class="text-[10px] text-gray-400">This log is related to category or system settings.</p>
                 </div>
               </div>
+
+              <!-- Signature Section -->
+              <div v-if="selectedLog.signatureData" class="space-y-4">
+                <p class="text-sm font-bold text-gray-400 uppercase tracking-widest">Digital Signature</p>
+                <div class="bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl p-4 flex flex-col items-center">
+                   <img :src="selectedLog.signatureData" alt="Digital Signature" class="max-w-full h-auto mix-blend-multiply" />
+                   <p class="text-[10px] text-slate-400 mt-2 font-bold uppercase tracking-widest italic">Electronically Signed Confirmation</p>
+                </div>
+              </div>
             </div>
 
             <!-- Footer -->

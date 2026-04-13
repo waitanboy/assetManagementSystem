@@ -45,6 +45,7 @@ public class AuthController {
         User newUser = User.builder()
                 .email(signupRequest.getEmail())
                 .password(signupRequest.getPassword())
+                .name(signupRequest.getName())
                 .department(signupRequest.getDepartment())
                 .role("USER")
                 .status("PENDING")
@@ -59,14 +60,22 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
         User user = userMapper.findByEmail(loginRequest.getEmail());
         
-        if (user != null && passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+        if (user == null) {
+            System.out.println("[LOGIN] User not found with email: " + loginRequest.getEmail());
+            return ResponseEntity.status(401).body("Invalid email or password");
+        }
+
+        if (passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
             if ("PENDING".equals(user.getStatus())) {
+                System.out.println("[LOGIN] Account pending: " + loginRequest.getEmail());
                 return ResponseEntity.status(403).body("Account pending admin approval");
             }
             if ("REJECTED".equals(user.getStatus())) {
+                System.out.println("[LOGIN] Account rejected: " + loginRequest.getEmail());
                 return ResponseEntity.status(403).body("Account rejected by admin");
             }
 
+            System.out.println("[LOGIN] Success: " + loginRequest.getEmail());
             String token = jwtUtil.generateToken(user.getEmail(), user.getRole());
             
             // Set HttpOnly Cookie
@@ -80,10 +89,12 @@ public class AuthController {
             Map<String, Object> body = new HashMap<>();
             body.put("id", user.getId());
             body.put("email", user.getEmail());
+            body.put("name", user.getName());
             body.put("role", user.getRole());
             return ResponseEntity.ok(body);
         }
         
+        System.out.println("[LOGIN] Password mismatch for: " + loginRequest.getEmail());
         return ResponseEntity.status(401).body("Invalid email or password");
     }
 
@@ -104,11 +115,14 @@ public class AuthController {
             String email = authentication.getPrincipal().toString();
             User user = userMapper.findByEmail(email);
             if (user != null) {
-                Map<String, Object> body = new HashMap<>();
-                body.put("id", user.getId());
-                body.put("email", user.getEmail());
-                body.put("role", user.getRole());
-                return ResponseEntity.ok(body);
+                Map<String, Object> userData = new HashMap<>();
+                userData.put("id", user.getId());
+                userData.put("email", user.getEmail());
+                userData.put("name", user.getName());
+                userData.put("role", user.getRole());
+                userData.put("department", user.getDepartment());
+                userData.put("status", user.getStatus());
+                return ResponseEntity.ok(userData);
             }
         }
         return ResponseEntity.status(401).build();

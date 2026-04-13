@@ -4,6 +4,7 @@ import com.assetmanagement.backend.entity.Transaction;
 import com.assetmanagement.backend.entity.User;
 import com.assetmanagement.backend.mapper.TransactionMapper;
 import com.assetmanagement.backend.mapper.UserMapper;
+import com.assetmanagement.backend.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,6 +23,7 @@ public class UserService {
     private final UserMapper userMapper;
     private final TransactionMapper transactionMapper;
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
     public Long getCurrentUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -88,6 +90,9 @@ public class UserService {
             user.setStatus("APPROVED");
             userMapper.update(user);
             logActivity(null, "UPDATE", "User approved: " + user.getEmail());
+            
+            // Send welcome email
+            emailService.sendWelcomeEmail(user.getEmail());
         }
     }
 
@@ -99,6 +104,36 @@ public class UserService {
             userMapper.update(user);
             logActivity(null, "UPDATE", "User rejected: " + user.getEmail());
         }
+    }
+
+    @Transactional
+    public void updateMyProfile(User profileData) {
+        Long currentUserId = getCurrentUserId();
+        if (currentUserId == null) return;
+
+        User existingUser = userMapper.findById(currentUserId);
+        if (existingUser == null) return;
+
+        boolean passwordChanged = false;
+        if (profileData.getPassword() != null && !profileData.getPassword().isEmpty()) {
+            existingUser.setPassword(passwordEncoder.encode(profileData.getPassword()));
+            passwordChanged = true;
+        }
+
+        User oldUserSnapshot = User.builder()
+                .email(existingUser.getEmail())
+                .department(existingUser.getDepartment())
+                .role(existingUser.getRole())
+                .build();
+
+        existingUser.setEmail(profileData.getEmail());
+        existingUser.setName(profileData.getName());
+        existingUser.setDepartment(profileData.getDepartment());
+
+        userMapper.update(existingUser);
+
+        String diffNote = buildUserDiff(oldUserSnapshot, existingUser, passwordChanged);
+        logActivity(null, "UPDATE", "Profile updated by user: " + existingUser.getEmail() + diffNote);
     }
 
     private void logActivity(Long assetId, String type, String note) {
@@ -126,6 +161,9 @@ public class UserService {
         }
         if (!Objects.equals(oldUser.getDepartment(), newUser.getDepartment())) {
             changes.add("부서: '" + oldUser.getDepartment() + "' → '" + newUser.getDepartment() + "'");
+        }
+        if (!Objects.equals(oldUser.getName(), newUser.getName())) {
+            changes.add("이름: '" + oldUser.getName() + "' → '" + newUser.getName() + "'");
         }
         if (passwordChanged) {
             changes.add("비밀번호 변경됨");

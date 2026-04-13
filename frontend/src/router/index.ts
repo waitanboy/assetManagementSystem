@@ -38,9 +38,9 @@ const router = createRouter({
           component: () => import('../views/AssetDetailView.vue'),
         },
         {
-          path: 'categories',
-          name: 'Categories',
-          component: () => import('../views/CategoryListView.vue'),
+          path: 'settings',
+          name: 'System Settings',
+          component: () => import('../views/SystemSettingsView.vue'),
           meta: { requiresRole: 'ADMIN' },
         },
         {
@@ -65,6 +65,16 @@ const router = createRouter({
           name: 'Maintenance',
           component: () => import('../views/MaintenanceView.vue'),
           meta: { requiresRole: 'ADMIN' },
+        },
+        {
+          path: 'profile',
+          name: 'My Profile',
+          component: () => import('../views/ProfileView.vue'),
+        },
+        {
+          path: 'requests',
+          name: 'Rental Requests',
+          component: () => import('../views/RentalRequestView.vue'),
         },
       ],
     },

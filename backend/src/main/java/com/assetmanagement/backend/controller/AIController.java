@@ -31,4 +31,20 @@ public class AIController {
             return ResponseEntity.internalServerError().body(Map.of("error", "AI Server error"));
         }
     }
+
+    @PostMapping("/ocr")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Map<String, String>> processIDCard(@RequestParam("file") org.springframework.web.multipart.MultipartFile file) {
+        if (file.isEmpty()) {
+            return ResponseEntity.badRequest().body(Map.of("error", "File is empty"));
+        }
+        
+        try {
+            String extractedInfo = aiService.extractIdCardInfo(file.getBytes());
+            return ResponseEntity.ok(Map.of("result", extractedInfo));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body(Map.of("error", "OCR failed: " + e.getMessage()));
+        }
+    }
 }

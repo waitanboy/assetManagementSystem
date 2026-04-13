@@ -88,6 +88,11 @@ const handleReject = async (id: number) => {
         </div>
 
         <div class="space-y-3">
+          <div class="mb-4">
+            <h3 class="text-lg font-black text-slate-800">{{ user.name || user.email.split('@')[0] }}</h3>
+            <p v-if="!user.name" class="text-[9px] text-rose-400 font-bold uppercase tracking-tighter">* Profile name not set</p>
+          </div>
+
           <div>
             <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Email Address</p>
             <div class="flex items-center text-gray-700">

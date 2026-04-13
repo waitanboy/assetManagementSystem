@@ -26,4 +26,7 @@ public class Transaction {
     private String userEmail;
     private String userRole;
     private String userDepartment;
+    
+    private String signatureData; // Base64 signature image
+    private String ocrData;
 }

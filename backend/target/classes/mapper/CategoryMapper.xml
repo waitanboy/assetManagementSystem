@@ -14,13 +14,14 @@
     </select>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO category (name)
-        VALUES (#{name})
+        INSERT INTO category (name, use_ocr)
+        VALUES (#{name}, #{useOcr})
     </insert>
 
     <update id="update">
         UPDATE category
-        SET name = #{name}
+        SET name = #{name},
+            use_ocr = #{useOcr}
         WHERE id = #{id}
     </update>
 
