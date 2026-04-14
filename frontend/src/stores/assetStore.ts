@@ -59,11 +59,11 @@ export const useAssetStore = defineStore('asset', {
       }
     },
 
-    async fetchAssets(search?: string, status?: string) {
+    async fetchAssets(search?: string, status?: string, categoryId?: number) {
       this.loading = true
       try {
         const response = await api.get<Asset[]>('/assets', {
-          params: { search, status }
+          params: { search, status, categoryId }
         })
         this.assets = response.data
       } catch (err: any) {
@@ -121,9 +121,9 @@ export const useAssetStore = defineStore('asset', {
       }
     },
 
-    async rentAsset(id: number, userId: number, note: string, dueDate?: string) {
+    async rentAsset(id: number, userId: number, note: string, dueDate?: string, signatureData?: string, ocrData?: string) {
       try {
-        await api.post(`/assets/${id}/rent`, { userId, note, dueDate })
+        await api.post(`/assets/${id}/rent`, { userId, note, dueDate, signatureData, ocrData })
         await this.fetchAssets()
         await this.fetchMyAssets()
         await this.fetchStats()
@@ -132,9 +132,9 @@ export const useAssetStore = defineStore('asset', {
       }
     },
 
-    async returnAsset(id: number, userId: number, note: string) {
+    async returnAsset(id: number, userId: number, note: string, signatureData?: string) {
       try {
-        await api.post(`/assets/${id}/return`, { userId, note })
+        await api.post(`/assets/${id}/return`, { userId, note, signatureData })
         await this.fetchAssets()
         await this.fetchMyAssets()
         await this.fetchStats()

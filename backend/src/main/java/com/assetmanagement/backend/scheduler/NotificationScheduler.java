@@ -27,7 +27,7 @@ public class NotificationScheduler {
     public void checkOverdueAndNotify() {
         System.out.println("Running scheduled overdue check...");
         
-        List<Asset> rentedAssets = assetMapper.findAll(null, "RENTED");
+        List<Asset> rentedAssets = assetMapper.findAll(null, "RENTED", null);
         LocalDate today = LocalDate.now();
         int count = 0;
 

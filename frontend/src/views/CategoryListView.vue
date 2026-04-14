@@ -19,7 +19,7 @@ const handleAdd = async () => {
     return
   }
   try {
-    await categoryStore.addCategory(newCategoryName.value)
+    await categoryStore.addCategory(newCategoryName.value, false)
     newCategoryName.value = ''
   } catch (err: any) {
     const errorMsg = err.response?.data?.message || err.message || 'Failed to add category'
@@ -40,7 +40,7 @@ const cancelEdit = () => {
 const handleUpdate = async (id: number) => {
   if (!editingName.value.trim()) return
   try {
-    await categoryStore.updateCategory(id, editingName.value)
+    await categoryStore.updateCategory(id, editingName.value, false)
     editingId.value = null
   } catch (err: any) {
     alert(err.message || 'Failed to update category')

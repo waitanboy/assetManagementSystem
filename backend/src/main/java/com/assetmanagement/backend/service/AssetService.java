@@ -25,8 +25,8 @@ public class AssetService {
     private final EmailService emailService;
 
     @Transactional(readOnly = true)
-    public List<Asset> getAllAssets(String search, String status) {
-        return assetMapper.findAll(search, status);
+    public List<Asset> getAllAssets(String search, String status, Long categoryId) {
+        return assetMapper.findAll(search, status, categoryId);
     }
 
     @Transactional(readOnly = true)

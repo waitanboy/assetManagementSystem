@@ -23,8 +23,9 @@ public class AssetController {
     @GetMapping
     public ResponseEntity<List<Asset>> getAllAssets(
             @RequestParam(required = false) String search,
-            @RequestParam(required = false) String status) {
-        return ResponseEntity.ok(assetService.getAllAssets(search, status));
+            @RequestParam(required = false) String status,
+            @RequestParam(required = false) Long categoryId) {
+        return ResponseEntity.ok(assetService.getAllAssets(search, status, categoryId));
     }
 
     @GetMapping("/my")

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LayoutDashboard, Package, Tag, Users, Activity, Megaphone, Briefcase, Wrench, Settings2, CheckSquare } from 'lucide-vue-next'
+import { LayoutDashboard, Package, Users, Activity, Megaphone, Briefcase, Wrench, Settings2, CheckSquare } from 'lucide-vue-next'
 import { useAuthStore } from '../../stores/authStore'
 
 defineProps<{

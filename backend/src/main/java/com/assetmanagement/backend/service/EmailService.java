@@ -69,4 +69,17 @@ public class EmailService {
                 "<br><p>사내 자산 관리 시스템 팀 드림</p>";
         sendEmail(toEmail, subject, content);
     }
+
+    public void sendPasswordResetEmail(String toEmail, String resetLink) {
+        String subject = "[Asset Management] 비밀번호 초기화 안내";
+        String content = "<h2>비밀번호 초기화 요청</h2>" +
+                "<p>귀하의 계정에 대한 비밀번호 초기화 요청이 접수되었습니다.</p>" +
+                "<p>아래 링크를 클릭하여 비밀번호를 재설정해 주세요. (유효시간: 1시간)</p>" +
+                "<div style='margin: 25px 0;'>" +
+                "<a href='" + resetLink + "' style='background-color: #0f172a; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;'>비밀번호 재설정하기</a>" +
+                "</div>" +
+                "<p>만약 본인이 요청한 것이 아니라면 이 이메일을 무시하셔도 됩니다.</p>" +
+                "<br><p>사내 자산 관리 시스템 팀 드림</p>";
+        sendEmail(toEmail, subject, content);
+    }
 }

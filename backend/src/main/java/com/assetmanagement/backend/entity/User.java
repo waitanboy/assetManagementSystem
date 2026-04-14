@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,4 +36,7 @@ public class User {
     private String department;
 
     private String status;
+
+    private String resetToken;
+    private LocalDateTime resetTokenExpiry;
 }

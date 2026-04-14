@@ -5,6 +5,7 @@ import com.assetmanagement.backend.dto.SignupRequest;
 import com.assetmanagement.backend.entity.User;
 import com.assetmanagement.backend.mapper.UserMapper;
 import com.assetmanagement.backend.service.UserService;
+import com.assetmanagement.backend.service.EmailService;
 import com.assetmanagement.backend.security.JwtUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,6 +28,7 @@ public class AuthController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+    private final EmailService emailService;
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody SignupRequest signupRequest) {
@@ -126,5 +128,32 @@ public class AuthController {
             }
         }
         return ResponseEntity.status(401).build();
+    }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<?> forgotPassword(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        try {
+            String token = userService.createPasswordResetToken(email);
+            String resetLink = "http://localhost:5173/reset-password?token=" + token;
+            emailService.sendPasswordResetEmail(email, resetLink);
+            return ResponseEntity.ok("비밀번호 초기화 링크가 이메일로 발송되었습니다.");
+        } catch (Exception e) {
+            // We return 200 even if user not found for security (prevent email enumeration)
+            // But for this internal tool, showing error is fine for UX.
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> request) {
+        String token = request.get("token");
+        String newPassword = request.get("newPassword");
+        try {
+            userService.resetPassword(token, newPassword);
+            return ResponseEntity.ok("비밀번호가 성공적으로 초기화되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
     }
 }

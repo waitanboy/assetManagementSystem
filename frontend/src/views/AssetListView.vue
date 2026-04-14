@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
-import { Plus, Search, MapPin, Tag, Edit2, Trash2, ArrowUpRight, ArrowDownLeft, Filter, History, UserCircle, Lock, Download, Upload } from 'lucide-vue-next'
+import { Plus, Search, MapPin, Tag, Edit2, Trash2, ArrowUpRight, ArrowDownLeft, Filter, UserCircle, Lock, Download, Upload } from 'lucide-vue-next'
 import { useAssetStore, type Asset } from '../stores/assetStore'
 import { useAuthStore } from '../stores/authStore'
 import { useCategoryStore } from '../stores/categoryStore'
@@ -16,6 +16,7 @@ const showTransactionModal = ref(false)
 const showRequestModal = ref(false)
 const searchQuery = ref('')
 const selectedStatus = ref('')
+const selectedCategory = ref<string>('')
 const selectedAsset = ref<Asset | null>(null)
 const transactionType = ref<'RENT' | 'RETURN'>('RENT')
 
@@ -23,15 +24,16 @@ let timeout: any = null
 const debouncedFetch = () => {
   if (timeout) clearTimeout(timeout)
   timeout = setTimeout(() => {
-    assetStore.fetchAssets(searchQuery.value, selectedStatus.value)
+    assetStore.fetchAssets(searchQuery.value, selectedStatus.value, selectedCategory.value ? Number(selectedCategory.value) : undefined)
   }, 300)
 }
 
 onMounted(() => {
   assetStore.fetchAssets()
+  categoryStore.fetchCategories()
 })
 
-watch([searchQuery, selectedStatus], () => {
+watch([searchQuery, selectedStatus, selectedCategory], () => {
   debouncedFetch()
 })
 
@@ -193,6 +195,24 @@ const handleFileUpload = (event: Event) => {
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
           </div>
         </div>
+
+        <div class="relative flex-shrink-0 w-full sm:w-auto">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 pointer-events-none">
+            <Tag class="w-4 h-4" />
+          </span>
+          <select 
+            v-model="selectedCategory"
+            class="appearance-none block w-full pl-9 pr-10 py-2 bg-white border border-gray-100 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all cursor-pointer text-sm font-medium min-w-[140px]"
+          >
+            <option value="">All Categories</option>
+            <option v-for="cat in categoryStore.categories" :key="cat.id" :value="cat.id">
+              {{ cat.name }}
+            </option>
+          </select>
+          <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+        </div>
       </div>
 
       <div v-if="authStore.isAdmin" class="flex gap-2">
@@ -259,8 +279,8 @@ const handleFileUpload = (event: Event) => {
                     <router-link :to="`/assets/${asset.id}`" class="font-semibold text-gray-800 hover:text-blue-600 transition-colors block text-sm leading-tight">
                       {{ asset.name }}
                     </router-link>
-                    <span class="text-[10px] bg-slate-100 text-slate-400 px-1.5 py-0.5 rounded font-mono mt-0.5 inline-block">
-                      Cat #{{ asset.categoryId }}
+                    <span class="text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded font-bold mt-1 inline-block border border-blue-100 uppercase tracking-tighter">
+                      {{ categoryStore.categories.find(c => c.id === asset.categoryId)?.name || '기타' }}
                     </span>
                   </div>
                 </div>

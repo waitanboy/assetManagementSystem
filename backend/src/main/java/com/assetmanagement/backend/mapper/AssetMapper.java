@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface AssetMapper {
-    List<Asset> findAll(@Param("search") String search, @Param("status") String status);
+    List<Asset> findAll(@Param("search") String search, @Param("status") String status, @Param("categoryId") Long categoryId);
     Asset findById(Long id);
     void insert(Asset asset);
     void insertBulk(@Param("assets") List<Asset> assets);

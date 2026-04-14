@@ -59,7 +59,7 @@ public class NotificationService {
             }
 
             // Overdue Assets (dueDate < today)
-            List<Asset> rentedAssets = assetMapper.findAll(null, "RENTED");
+            List<Asset> rentedAssets = assetMapper.findAll(null, "RENTED", null);
             int overdueCount = 0;
             LocalDate today = LocalDate.now();
 
@@ -90,7 +90,7 @@ public class NotificationService {
 
         // 2. User Logic
         // My Active Rented Assets & Overdue Check
-        List<Asset> allRented = assetMapper.findAll(null, "RENTED");
+        List<Asset> allRented = assetMapper.findAll(null, "RENTED", null);
         List<Asset> myRentedAssets = new ArrayList<>();
         int myOverdueCount = 0;
         LocalDate today = LocalDate.now();

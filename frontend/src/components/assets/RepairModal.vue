@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { Wrench, CheckCircle2, DollarSign } from 'lucide-vue-next'
 import { useAssetStore, type Asset } from '../../stores/assetStore'
 

@@ -5,6 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
@@ -15,6 +18,7 @@ public class DatabaseMigrationConfig {
     private final JdbcTemplate jdbcTemplate;
 
     @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
     public CommandLineRunner migrateDatabase() {
         return args -> {
             log.info("Starting database migration check...");
@@ -24,6 +28,9 @@ public class DatabaseMigrationConfig {
             addColumnIfMissing("rental_request", "ocr_data", "TEXT");
             addColumnIfMissing("transaction", "ocr_data", "TEXT");
             addColumnIfMissing("transaction", "signature_data", "LONGTEXT");
+
+            addColumnIfMissing("users", "reset_token", "VARCHAR(255)");
+            addColumnIfMissing("users", "reset_token_expiry", "TIMESTAMP NULL");
 
             log.info("Database migration check completed.");
         };

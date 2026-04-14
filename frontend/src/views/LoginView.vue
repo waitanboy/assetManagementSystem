@@ -182,6 +182,16 @@ const handleSubmit = async () => {
                 />
               </div>
             </div>
+            
+            <div v-if="mode === 'login'" class="flex justify-end pr-1">
+              <button 
+                type="button" 
+                @click="router.push('/forgot-password')" 
+                class="text-xs font-bold text-slate-400 hover:text-blue-600 transition-colors"
+              >
+                Forgot Password?
+              </button>
+            </div>
 
             <button
               type="submit"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { Wrench, CheckCircle2, Search, Package, UserCircle, CreditCard, Clock } from 'lucide-vue-next'
+import { Wrench, CheckCircle2, Search, Package, UserCircle, Clock } from 'lucide-vue-next'
 import { useAssetStore, type Asset, type RepairLog } from '../stores/assetStore'
 import { useUserStore } from '../stores/userStore'
 import RepairModal from '../components/assets/RepairModal.vue'

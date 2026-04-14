@@ -4,7 +4,7 @@ import {
   Package, CheckCircle, AlertCircle, Wrench, ArrowUpRight, ArrowDownLeft, 
   Clock, Plus, Pencil, Trash2, RotateCcw, AlertTriangle, UserCircle, Mail, ExternalLink 
 } from 'lucide-vue-next'
-import { useAssetStore, type Asset } from '../stores/assetStore'
+import { useAssetStore } from '../stores/assetStore'
 import { useTransactionStore } from '../stores/transactionStore'
 import { useAuthStore } from '../stores/authStore'
 import api from '../api'

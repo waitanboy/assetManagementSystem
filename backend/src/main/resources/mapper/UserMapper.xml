@@ -13,6 +13,10 @@
         SELECT * FROM users WHERE id = #{id}
     </select>
 
+    <select id="findByResetToken" resultType="com.assetmanagement.backend.entity.User">
+        SELECT * FROM users WHERE reset_token = #{resetToken}
+    </select>
+
     <select id="findAll" resultType="com.assetmanagement.backend.entity.User">
         SELECT id, email, name, role, department, status FROM users
     </select>
@@ -34,7 +38,9 @@
             name = #{name},
             role = #{role},
             department = #{department},
-            status = #{status}
+            status = #{status},
+            reset_token = #{resetToken},
+            reset_token_expiry = #{resetTokenExpiry}
         <if test="password != null and password != ''">
             , password = #{password}
         </if>

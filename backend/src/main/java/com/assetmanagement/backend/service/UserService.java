@@ -12,9 +12,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -170,5 +172,39 @@ public class UserService {
         }
 
         return changes.isEmpty() ? " (변경사항 없음)" : " [변경내역: " + String.join(", ", changes) + "]";
+    }
+
+    @Transactional
+    public String createPasswordResetToken(String email) {
+        User user = userMapper.findByEmail(email);
+        if (user == null) {
+            throw new RuntimeException("해당 이메일로 가입된 사용자가 없습니다.");
+        }
+
+        String token = UUID.randomUUID().toString();
+        user.setResetToken(token);
+        user.setResetTokenExpiry(LocalDateTime.now().plusHours(1)); // Expiry in 1 hour
+        userMapper.update(user);
+
+        return token;
+    }
+
+    @Transactional
+    public void resetPassword(String token, String newPassword) {
+        User user = userMapper.findByResetToken(token);
+        if (user == null) {
+            throw new RuntimeException("유효하지 않은 토큰입니다.");
+        }
+
+        if (user.getResetTokenExpiry().isBefore(LocalDateTime.now())) {
+            throw new RuntimeException("만료된 토큰입니다. 다시 요청해 주세요.");
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        user.setResetToken(null); // Clear token
+        user.setResetTokenExpiry(null);
+        userMapper.update(user);
+
+        logActivity(null, "UPDATE", "Password reset successful via token for user: " + user.getEmail());
     }
 }
