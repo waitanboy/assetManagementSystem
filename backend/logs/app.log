@@ -1120,3 +1120,411 @@ This generated password is for development use only. Your security configuration
 2026-04-17T15:21:20.096+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.m.R.findByStatus                   : ==> Parameters: PENDING(String)
 2026-04-17T15:21:20.097+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.m.R.findByStatus                   : <==      Total: 0
 2026-04-17T15:40:06.026+09:00  INFO 5232 --- [MessageBroker-13] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[1 current WS(1)-HttpStream(0)-HttpPoll(0), 1 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(1)-CONNECTED(1)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 6], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 1], sockJsScheduler[pool size = 16, active threads = 1, queued tasks = 3, completed tasks = 880]
+2026-04-17T16:10:06.029+09:00  INFO 5232 --- [MessageBroker-10] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[1 current WS(1)-HttpStream(0)-HttpPoll(0), 1 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(1)-CONNECTED(1)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 6], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 1], sockJsScheduler[pool size = 16, active threads = 1, queued tasks = 3, completed tasks = 1313]
+2026-04-17T16:11:04.911+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/auth/me
+2026-04-17T16:11:04.914+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/auth/me
+2026-04-17T16:11:04.916+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:11:04.917+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:11:04.919+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:11:04.932+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/auth/me
+2026-04-17T16:11:04.934+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/auth/me
+2026-04-17T16:11:04.934+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:11:04.934+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:11:04.935+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:11:04.965+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/system-user
+2026-04-17T16:11:04.965+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/admin-user
+2026-04-17T16:11:04.966+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/system-user
+2026-04-17T16:11:04.966+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/admin-user
+2026-04-17T16:11:04.967+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.backend.mapper.UserMapper.findAll    : ==>  Preparing: SELECT id, email, name, role, department, status FROM users
+2026-04-17T16:11:04.967+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.backend.mapper.UserMapper.findAll    : ==> Parameters: 
+2026-04-17T16:11:04.967+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:11:04.967+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: assetSysAdmin@asset.com(String)
+2026-04-17T16:11:04.968+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.backend.mapper.UserMapper.findAll    : <==      Total: 6
+2026-04-17T16:11:04.968+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:11:04.972+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /ws/info?t=1776409864968
+2026-04-17T16:11:04.974+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /ws/info?t=1776409864968
+2026-04-17T16:11:04.979+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/unread-count
+2026-04-17T16:11:04.980+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/unread-count
+2026-04-17T16:11:04.982+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /ws/205/e3rr5sgd/websocket
+2026-04-17T16:11:04.983+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:11:04.983+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /ws/205/e3rr5sgd/websocket
+2026-04-17T16:11:04.983+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:11:04.984+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.backend.config.WebSocketConfig       : WebSocket handshake: authenticated user admin@asset.com
+2026-04-17T16:11:04.984+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:11:04.985+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.m.ChatMessageMapper.countUnread    : ==>  Preparing: SELECT COUNT(*) FROM chat_message WHERE receiver_id = ? AND is_read = FALSE
+2026-04-17T16:11:04.985+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.m.ChatMessageMapper.countUnread    : ==> Parameters: 1(Long)
+2026-04-17T16:11:04.992+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.m.ChatMessageMapper.countUnread    : <==      Total: 1
+2026-04-17T16:11:05.003+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/requests/pending
+2026-04-17T16:11:05.003+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/unread-count
+2026-04-17T16:11:05.003+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/notifications
+2026-04-17T16:11:05.004+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/requests/pending
+2026-04-17T16:11:05.004+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/notifications
+2026-04-17T16:11:05.004+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/unread-count
+2026-04-17T16:11:05.005+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.assetmanagement.backend.controller.RentalRequestController.getPendingRequests(); target is of class [com.assetmanagement.backend.controller.RentalRequestController]
+2026-04-17T16:11:05.005+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:11:05.005+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:11:05.005+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:11:05.005+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:11:05.005+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.assetmanagement.backend.controller.RentalRequestController.getPendingRequests(); target is of class [com.assetmanagement.backend.controller.RentalRequestController]
+2026-04-17T16:11:05.007+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:11:05.007+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:11:05.007+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.m.R.findByStatus                   : ==>  Preparing: SELECT r.*, a.name as assetName, a.serial_number as assetSerial, u.email as userEmail, u.name as userName, u.department as userDepartment, c.use_ocr as useOcr FROM rental_request r JOIN asset a ON r.asset_id = a.id JOIN category c ON a.category_id = c.id JOIN users u ON r.user_id = u.id WHERE r.status = ? ORDER BY r.request_date DESC
+2026-04-17T16:11:05.007+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.m.ChatMessageMapper.countUnread    : ==>  Preparing: SELECT COUNT(*) FROM chat_message WHERE receiver_id = ? AND is_read = FALSE
+2026-04-17T16:11:05.007+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.backend.mapper.UserMapper.findAll    : ==>  Preparing: SELECT id, email, name, role, department, status FROM users
+2026-04-17T16:11:05.007+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.m.R.findByStatus                   : ==> Parameters: PENDING(String)
+2026-04-17T16:11:05.007+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.backend.mapper.UserMapper.findAll    : ==> Parameters: 
+2026-04-17T16:11:05.007+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.m.ChatMessageMapper.countUnread    : ==> Parameters: 1(Long)
+2026-04-17T16:11:05.008+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.m.ChatMessageMapper.countUnread    : <==      Total: 1
+2026-04-17T16:11:05.008+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.backend.mapper.UserMapper.findAll    : <==      Total: 6
+2026-04-17T16:11:05.009+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.m.R.findByStatus                   : <==      Total: 0
+2026-04-17T16:11:05.010+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.backend.config.WebSocketConfig       : WebSocket CONNECT: Authorization header present=false
+2026-04-17T16:11:05.010+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.backend.mapper.AssetMapper.findAll   : ==>  Preparing: SELECT a.*, u.email AS rentedByEmail, u.department AS rentedByDepartment, t.user_id AS rentedByUserId, t.due_date AS dueDate FROM asset a LEFT JOIN ( SELECT asset_id, MAX(id) AS latest_tx_id FROM `transaction` WHERE type = 'RENT' GROUP BY asset_id ) latest ON a.id = latest.asset_id AND a.status = 'RENTED' LEFT JOIN `transaction` t ON t.id = latest.latest_tx_id LEFT JOIN users u ON t.user_id = u.id WHERE a.use_yn = 'Y' AND a.status = ?
+2026-04-17T16:11:05.010+09:00  INFO 5232 --- [http-nio-8080-exec-10] c.a.backend.config.WebSocketConfig       : WebSocket CONNECT authorized: user=admin@asset.com
+2026-04-17T16:11:05.011+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.backend.mapper.AssetMapper.findAll   : ==> Parameters: RENTED(String)
+2026-04-17T16:11:05.012+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/requests/pending
+2026-04-17T16:11:05.013+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/requests/pending
+2026-04-17T16:11:05.013+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.backend.mapper.AssetMapper.findAll   : <==      Total: 1
+2026-04-17T16:11:05.014+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.assetmanagement.backend.controller.RentalRequestController.getPendingRequests(); target is of class [com.assetmanagement.backend.controller.RentalRequestController]
+2026-04-17T16:11:05.014+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.assetmanagement.backend.controller.RentalRequestController.getPendingRequests(); target is of class [com.assetmanagement.backend.controller.RentalRequestController]
+2026-04-17T16:11:05.014+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.TransactionMapper.findByAssetId  : ==>  Preparing: SELECT t.*, a.name as assetName, a.serial_number as assetSerial, u.email as userEmail, u.role as userRole, u.department as userDepartment FROM transaction t LEFT JOIN asset a ON t.asset_id = a.id JOIN users u ON t.user_id = u.id WHERE t.asset_id = ? ORDER BY t.transaction_date DESC
+2026-04-17T16:11:05.014+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.TransactionMapper.findByAssetId  : ==> Parameters: 1(Long)
+2026-04-17T16:11:05.015+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.m.R.findByStatus                   : ==>  Preparing: SELECT r.*, a.name as assetName, a.serial_number as assetSerial, u.email as userEmail, u.name as userName, u.department as userDepartment, c.use_ocr as useOcr FROM rental_request r JOIN asset a ON r.asset_id = a.id JOIN category c ON a.category_id = c.id JOIN users u ON r.user_id = u.id WHERE r.status = ? ORDER BY r.request_date DESC
+2026-04-17T16:11:05.015+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.m.R.findByStatus                   : ==> Parameters: PENDING(String)
+2026-04-17T16:11:05.016+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.m.R.findByStatus                   : <==      Total: 0
+2026-04-17T16:11:05.016+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.TransactionMapper.findByAssetId  : <==      Total: 3
+2026-04-17T16:11:05.017+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.backend.mapper.AssetMapper.findAll   : ==>  Preparing: SELECT a.*, u.email AS rentedByEmail, u.department AS rentedByDepartment, t.user_id AS rentedByUserId, t.due_date AS dueDate FROM asset a LEFT JOIN ( SELECT asset_id, MAX(id) AS latest_tx_id FROM `transaction` WHERE type = 'RENT' GROUP BY asset_id ) latest ON a.id = latest.asset_id AND a.status = 'RENTED' LEFT JOIN `transaction` t ON t.id = latest.latest_tx_id LEFT JOIN users u ON t.user_id = u.id WHERE a.use_yn = 'Y' AND a.status = ?
+2026-04-17T16:11:05.017+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.backend.mapper.AssetMapper.findAll   : ==> Parameters: RENTED(String)
+2026-04-17T16:11:05.018+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.backend.mapper.AssetMapper.findAll   : <==      Total: 1
+2026-04-17T16:11:05.019+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.TransactionMapper.findByAssetId  : ==>  Preparing: SELECT t.*, a.name as assetName, a.serial_number as assetSerial, u.email as userEmail, u.role as userRole, u.department as userDepartment FROM transaction t LEFT JOIN asset a ON t.asset_id = a.id JOIN users u ON t.user_id = u.id WHERE t.asset_id = ? ORDER BY t.transaction_date DESC
+2026-04-17T16:11:05.020+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.TransactionMapper.findByAssetId  : ==> Parameters: 1(Long)
+2026-04-17T16:11:05.021+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.TransactionMapper.findByAssetId  : <==      Total: 3
+2026-04-17T16:11:05.022+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.backend.mapper.NoticeMapper.findAll  : ==>  Preparing: SELECT n.*, u.email as authorEmail FROM notice n JOIN users u ON n.author_id = u.id ORDER BY n.created_at DESC
+2026-04-17T16:11:05.022+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.backend.mapper.NoticeMapper.findAll  : ==> Parameters: 
+2026-04-17T16:11:05.025+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.backend.mapper.NoticeMapper.findAll  : <==      Total: 3
+2026-04-17T16:25:38.057+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/assets
+2026-04-17T16:25:38.057+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/categories
+2026-04-17T16:25:38.059+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/categories
+2026-04-17T16:25:38.059+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/assets
+2026-04-17T16:25:38.061+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.CategoryMapper.findAll      : ==>  Preparing: SELECT * FROM category ORDER BY id ASC
+2026-04-17T16:25:38.061+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.backend.mapper.AssetMapper.findAll   : ==>  Preparing: SELECT a.*, u.email AS rentedByEmail, u.department AS rentedByDepartment, t.user_id AS rentedByUserId, t.due_date AS dueDate FROM asset a LEFT JOIN ( SELECT asset_id, MAX(id) AS latest_tx_id FROM `transaction` WHERE type = 'RENT' GROUP BY asset_id ) latest ON a.id = latest.asset_id AND a.status = 'RENTED' LEFT JOIN `transaction` t ON t.id = latest.latest_tx_id LEFT JOIN users u ON t.user_id = u.id WHERE a.use_yn = 'Y'
+2026-04-17T16:25:38.061+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.CategoryMapper.findAll      : ==> Parameters: 
+2026-04-17T16:25:38.061+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.backend.mapper.AssetMapper.findAll   : ==> Parameters: 
+2026-04-17T16:25:38.062+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.CategoryMapper.findAll      : <==      Total: 6
+2026-04-17T16:25:38.065+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.backend.mapper.AssetMapper.findAll   : <==      Total: 156
+2026-04-17T16:25:39.680+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/requests/pending
+2026-04-17T16:25:39.681+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/requests/pending
+2026-04-17T16:25:39.681+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.assetmanagement.backend.controller.RentalRequestController.getPendingRequests(); target is of class [com.assetmanagement.backend.controller.RentalRequestController]
+2026-04-17T16:25:39.682+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.assetmanagement.backend.controller.RentalRequestController.getPendingRequests(); target is of class [com.assetmanagement.backend.controller.RentalRequestController]
+2026-04-17T16:25:39.683+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.m.R.findByStatus                   : ==>  Preparing: SELECT r.*, a.name as assetName, a.serial_number as assetSerial, u.email as userEmail, u.name as userName, u.department as userDepartment, c.use_ocr as useOcr FROM rental_request r JOIN asset a ON r.asset_id = a.id JOIN category c ON a.category_id = c.id JOIN users u ON r.user_id = u.id WHERE r.status = ? ORDER BY r.request_date DESC
+2026-04-17T16:25:39.683+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.m.R.findByStatus                   : ==> Parameters: PENDING(String)
+2026-04-17T16:25:39.684+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.m.R.findByStatus                   : <==      Total: 0
+2026-04-17T16:25:40.030+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/assets
+2026-04-17T16:25:40.032+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/assets
+2026-04-17T16:25:40.034+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.backend.mapper.AssetMapper.findAll   : ==>  Preparing: SELECT a.*, u.email AS rentedByEmail, u.department AS rentedByDepartment, t.user_id AS rentedByUserId, t.due_date AS dueDate FROM asset a LEFT JOIN ( SELECT asset_id, MAX(id) AS latest_tx_id FROM `transaction` WHERE type = 'RENT' GROUP BY asset_id ) latest ON a.id = latest.asset_id AND a.status = 'RENTED' LEFT JOIN `transaction` t ON t.id = latest.latest_tx_id LEFT JOIN users u ON t.user_id = u.id WHERE a.use_yn = 'Y'
+2026-04-17T16:25:40.035+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.backend.mapper.AssetMapper.findAll   : ==> Parameters: 
+2026-04-17T16:25:40.039+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.backend.mapper.AssetMapper.findAll   : <==      Total: 156
+2026-04-17T16:25:40.050+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/assets/repairs/all
+2026-04-17T16:25:40.052+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/assets/repairs/all
+2026-04-17T16:25:40.053+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.m.RepairLogMapper.findAllRepairs   : ==>  Preparing: SELECT * FROM repair_log ORDER BY start_date DESC
+2026-04-17T16:25:40.053+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.m.RepairLogMapper.findAllRepairs   : ==> Parameters: 
+2026-04-17T16:25:40.055+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.m.RepairLogMapper.findAllRepairs   : <==      Total: 1
+2026-04-17T16:25:40.061+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/users
+2026-04-17T16:25:40.062+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/users
+2026-04-17T16:25:40.062+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.assetmanagement.backend.controller.UserController.getAllUsers(); target is of class [com.assetmanagement.backend.controller.UserController]
+2026-04-17T16:25:40.062+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.assetmanagement.backend.controller.UserController.getAllUsers(); target is of class [com.assetmanagement.backend.controller.UserController]
+2026-04-17T16:25:40.063+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.backend.mapper.UserMapper.findAll    : ==>  Preparing: SELECT id, email, name, role, department, status FROM users
+2026-04-17T16:25:40.064+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.backend.mapper.UserMapper.findAll    : ==> Parameters: 
+2026-04-17T16:25:40.065+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.backend.mapper.UserMapper.findAll    : <==      Total: 6
+2026-04-17T16:25:40.447+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/assets/my
+2026-04-17T16:25:40.449+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/assets/my
+2026-04-17T16:25:40.450+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:25:40.451+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:25:40.452+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:25:40.452+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.AssetMapper.findMyRentedAssets   : ==>  Preparing: SELECT a.*, t.due_date as dueDate FROM asset a JOIN `transaction` t ON a.id = t.asset_id WHERE a.status = 'RENTED' AND a.use_yn = 'Y' AND t.user_id = ? AND t.type = 'RENT' AND t.id = (SELECT MAX(id) FROM `transaction` WHERE asset_id = a.id)
+2026-04-17T16:25:40.452+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.AssetMapper.findMyRentedAssets   : ==> Parameters: 1(Long)
+2026-04-17T16:25:40.454+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.AssetMapper.findMyRentedAssets   : <==      Total: 0
+2026-04-17T16:27:46.263+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/system/logs?lines=200
+2026-04-17T16:27:46.264+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/system/logs?lines=200
+2026-04-17T16:27:46.266+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.assetmanagement.backend.controller.SystemLogController.getLogs(int); target is of class [com.assetmanagement.backend.controller.SystemLogController]
+2026-04-17T16:27:46.266+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.assetmanagement.backend.controller.SystemLogController.getLogs(int); target is of class [com.assetmanagement.backend.controller.SystemLogController]
+2026-04-17T16:27:47.186+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/categories
+2026-04-17T16:27:47.186+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/departments
+2026-04-17T16:27:47.187+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/categories
+2026-04-17T16:27:47.187+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/departments
+2026-04-17T16:27:47.187+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.assetmanagement.backend.controller.DepartmentController.getAllDepartments(); target is of class [com.assetmanagement.backend.controller.DepartmentController]
+2026-04-17T16:27:47.188+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.assetmanagement.backend.controller.DepartmentController.getAllDepartments(); target is of class [com.assetmanagement.backend.controller.DepartmentController]
+2026-04-17T16:27:47.188+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.mapper.DepartmentMapper.findAll    : ==>  Preparing: SELECT * FROM department ORDER BY id ASC
+2026-04-17T16:27:47.188+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.mapper.DepartmentMapper.findAll    : ==> Parameters: 
+2026-04-17T16:27:47.188+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.CategoryMapper.findAll      : ==>  Preparing: SELECT * FROM category ORDER BY id ASC
+2026-04-17T16:27:47.188+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.CategoryMapper.findAll      : ==> Parameters: 
+2026-04-17T16:27:47.190+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.CategoryMapper.findAll      : <==      Total: 6
+2026-04-17T16:27:47.191+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.mapper.DepartmentMapper.findAll    : <==      Total: 5
+2026-04-17T16:27:48.008+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/transactions/recent?limit=50
+2026-04-17T16:27:48.009+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/transactions/recent?limit=50
+2026-04-17T16:27:48.010+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.m.TransactionMapper.findRecent     : ==>  Preparing: SELECT t.*, a.name as assetName, a.serial_number as assetSerial, u.email as userEmail, u.role as userRole, u.department as userDepartment FROM transaction t LEFT JOIN asset a ON t.asset_id = a.id JOIN users u ON t.user_id = u.id ORDER BY t.transaction_date DESC LIMIT ?
+2026-04-17T16:27:48.010+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.m.TransactionMapper.findRecent     : ==> Parameters: 50(Integer)
+2026-04-17T16:27:48.015+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.m.TransactionMapper.findRecent     : <==      Total: 50
+2026-04-17T16:27:48.929+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/users
+2026-04-17T16:27:48.931+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/users
+2026-04-17T16:27:48.931+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.assetmanagement.backend.controller.UserController.getAllUsers(); target is of class [com.assetmanagement.backend.controller.UserController]
+2026-04-17T16:27:48.932+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.assetmanagement.backend.controller.UserController.getAllUsers(); target is of class [com.assetmanagement.backend.controller.UserController]
+2026-04-17T16:27:48.933+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.backend.mapper.UserMapper.findAll    : ==>  Preparing: SELECT id, email, name, role, department, status FROM users
+2026-04-17T16:27:48.933+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.backend.mapper.UserMapper.findAll    : ==> Parameters: 
+2026-04-17T16:27:48.934+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.backend.mapper.UserMapper.findAll    : <==      Total: 6
+2026-04-17T16:27:49.924+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/board/posts
+2026-04-17T16:27:49.924+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/board/posts
+2026-04-17T16:27:49.928+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.mapper.BoardMapper.findAllPosts    : ==>  Preparing: SELECT p.*, u.name as authorName, u.email as authorEmail FROM board_post p JOIN users u ON p.author_id = u.id ORDER BY p.created_at DESC
+2026-04-17T16:27:49.928+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.mapper.BoardMapper.findAllPosts    : ==> Parameters: 
+2026-04-17T16:27:49.931+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.mapper.BoardMapper.findAllPosts    : <==      Total: 1
+2026-04-17T16:27:50.456+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/admin-user
+2026-04-17T16:27:50.457+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/admin-user
+2026-04-17T16:27:50.458+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.backend.mapper.UserMapper.findAll    : ==>  Preparing: SELECT id, email, name, role, department, status FROM users
+2026-04-17T16:27:50.458+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.backend.mapper.UserMapper.findAll    : ==> Parameters: 
+2026-04-17T16:27:50.460+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.backend.mapper.UserMapper.findAll    : <==      Total: 6
+2026-04-17T16:27:50.464+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/admin/conversations
+2026-04-17T16:27:50.466+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/admin/conversations
+2026-04-17T16:27:50.467+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.C.findRecentForAdmin             : ==>  Preparing: SELECT cm.*, u.name as senderName, u.email as senderEmail FROM chat_message cm JOIN users u ON cm.sender_id = u.id WHERE cm.id IN ( SELECT MAX(id) FROM chat_message WHERE receiver_id IS NOT NULL -- For simplicity, assuming receiver is always admin for now GROUP BY sender_id ) ORDER BY cm.timestamp DESC
+2026-04-17T16:27:50.468+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.C.findRecentForAdmin             : ==> Parameters: 
+2026-04-17T16:27:50.472+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.C.findRecentForAdmin             : <==      Total: 4
+2026-04-17T16:27:51.033+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/assets/my
+2026-04-17T16:27:51.034+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/assets/my
+2026-04-17T16:27:51.035+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:51.036+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:51.037+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:51.037+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.m.AssetMapper.findMyRentedAssets   : ==>  Preparing: SELECT a.*, t.due_date as dueDate FROM asset a JOIN `transaction` t ON a.id = t.asset_id WHERE a.status = 'RENTED' AND a.use_yn = 'Y' AND t.user_id = ? AND t.type = 'RENT' AND t.id = (SELECT MAX(id) FROM `transaction` WHERE asset_id = a.id)
+2026-04-17T16:27:51.038+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.m.AssetMapper.findMyRentedAssets   : ==> Parameters: 1(Long)
+2026-04-17T16:27:51.039+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.m.AssetMapper.findMyRentedAssets   : <==      Total: 0
+2026-04-17T16:27:51.665+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/admin-user
+2026-04-17T16:27:51.668+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/admin-user
+2026-04-17T16:27:51.668+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.backend.mapper.UserMapper.findAll    : ==>  Preparing: SELECT id, email, name, role, department, status FROM users
+2026-04-17T16:27:51.669+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.backend.mapper.UserMapper.findAll    : ==> Parameters: 
+2026-04-17T16:27:51.670+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.backend.mapper.UserMapper.findAll    : <==      Total: 6
+2026-04-17T16:27:51.676+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/admin/conversations
+2026-04-17T16:27:51.678+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/admin/conversations
+2026-04-17T16:27:51.679+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] c.a.b.m.C.findRecentForAdmin             : ==>  Preparing: SELECT cm.*, u.name as senderName, u.email as senderEmail FROM chat_message cm JOIN users u ON cm.sender_id = u.id WHERE cm.id IN ( SELECT MAX(id) FROM chat_message WHERE receiver_id IS NOT NULL -- For simplicity, assuming receiver is always admin for now GROUP BY sender_id ) ORDER BY cm.timestamp DESC
+2026-04-17T16:27:51.679+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] c.a.b.m.C.findRecentForAdmin             : ==> Parameters: 
+2026-04-17T16:27:51.681+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] c.a.b.m.C.findRecentForAdmin             : <==      Total: 4
+2026-04-17T16:27:52.758+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history/3
+2026-04-17T16:27:52.760+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history/3
+2026-04-17T16:27:52.761+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:52.761+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:52.763+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:52.764+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.m.C.findByInterlocutors            : ==>  Preparing: SELECT cm.*, u1.name as senderName, u1.email as senderEmail, u2.name as receiverName FROM chat_message cm JOIN users u1 ON cm.sender_id = u1.id LEFT JOIN users u2 ON cm.receiver_id = u2.id WHERE (cm.sender_id = ? AND cm.receiver_id = ?) OR (cm.sender_id = ? AND cm.receiver_id = ?) ORDER BY cm.timestamp ASC
+2026-04-17T16:27:52.764+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.m.C.findByInterlocutors            : ==> Parameters: 1(Long), 3(Long), 3(Long), 1(Long)
+2026-04-17T16:27:52.765+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.m.C.findByInterlocutors            : <==      Total: 2
+2026-04-17T16:27:52.772+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/read/3
+2026-04-17T16:27:52.772+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/read/3
+2026-04-17T16:27:52.774+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:52.774+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:52.776+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:52.777+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==>  Preparing: UPDATE chat_message SET is_read = TRUE WHERE sender_id = ? AND receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:52.777+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==> Parameters: 3(Long), 1(Long)
+2026-04-17T16:27:52.777+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.m.ChatMessageMapper.markAllAsRead  : <==    Updates: 0
+2026-04-17T16:27:52.783+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/unread-count
+2026-04-17T16:27:52.784+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/unread-count
+2026-04-17T16:27:52.786+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:52.786+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:52.787+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:52.787+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.m.ChatMessageMapper.countUnread    : ==>  Preparing: SELECT COUNT(*) FROM chat_message WHERE receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:52.788+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.m.ChatMessageMapper.countUnread    : ==> Parameters: 1(Long)
+2026-04-17T16:27:52.788+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.m.ChatMessageMapper.countUnread    : <==      Total: 1
+2026-04-17T16:27:53.324+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history/2
+2026-04-17T16:27:53.324+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history/2
+2026-04-17T16:27:53.326+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:53.327+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:53.328+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:53.328+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.m.C.findByInterlocutors            : ==>  Preparing: SELECT cm.*, u1.name as senderName, u1.email as senderEmail, u2.name as receiverName FROM chat_message cm JOIN users u1 ON cm.sender_id = u1.id LEFT JOIN users u2 ON cm.receiver_id = u2.id WHERE (cm.sender_id = ? AND cm.receiver_id = ?) OR (cm.sender_id = ? AND cm.receiver_id = ?) ORDER BY cm.timestamp ASC
+2026-04-17T16:27:53.329+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.m.C.findByInterlocutors            : ==> Parameters: 1(Long), 2(Long), 2(Long), 1(Long)
+2026-04-17T16:27:53.332+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.m.C.findByInterlocutors            : <==      Total: 7
+2026-04-17T16:27:53.340+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/read/2
+2026-04-17T16:27:53.342+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/read/2
+2026-04-17T16:27:53.343+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:53.343+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:53.344+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:53.345+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==>  Preparing: UPDATE chat_message SET is_read = TRUE WHERE sender_id = ? AND receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:53.345+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==> Parameters: 2(Long), 1(Long)
+2026-04-17T16:27:53.345+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.m.ChatMessageMapper.markAllAsRead  : <==    Updates: 0
+2026-04-17T16:27:53.350+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/unread-count
+2026-04-17T16:27:53.351+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/unread-count
+2026-04-17T16:27:53.351+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:53.352+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:53.353+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:53.353+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.m.ChatMessageMapper.countUnread    : ==>  Preparing: SELECT COUNT(*) FROM chat_message WHERE receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:53.353+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.m.ChatMessageMapper.countUnread    : ==> Parameters: 1(Long)
+2026-04-17T16:27:53.354+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.m.ChatMessageMapper.countUnread    : <==      Total: 1
+2026-04-17T16:27:53.815+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history/6
+2026-04-17T16:27:53.816+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history/6
+2026-04-17T16:27:53.817+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:53.817+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:53.818+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:53.818+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.C.findByInterlocutors            : ==>  Preparing: SELECT cm.*, u1.name as senderName, u1.email as senderEmail, u2.name as receiverName FROM chat_message cm JOIN users u1 ON cm.sender_id = u1.id LEFT JOIN users u2 ON cm.receiver_id = u2.id WHERE (cm.sender_id = ? AND cm.receiver_id = ?) OR (cm.sender_id = ? AND cm.receiver_id = ?) ORDER BY cm.timestamp ASC
+2026-04-17T16:27:53.819+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.C.findByInterlocutors            : ==> Parameters: 1(Long), 6(Long), 6(Long), 1(Long)
+2026-04-17T16:27:53.819+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.C.findByInterlocutors            : <==      Total: 0
+2026-04-17T16:27:53.826+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/read/6
+2026-04-17T16:27:53.827+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/read/6
+2026-04-17T16:27:53.828+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:53.828+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:53.829+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:53.829+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==>  Preparing: UPDATE chat_message SET is_read = TRUE WHERE sender_id = ? AND receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:53.831+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==> Parameters: 6(Long), 1(Long)
+2026-04-17T16:27:53.832+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.m.ChatMessageMapper.markAllAsRead  : <==    Updates: 0
+2026-04-17T16:27:53.837+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/unread-count
+2026-04-17T16:27:53.838+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/unread-count
+2026-04-17T16:27:53.838+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:53.839+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:53.840+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:53.840+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.b.m.ChatMessageMapper.countUnread    : ==>  Preparing: SELECT COUNT(*) FROM chat_message WHERE receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:53.840+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.b.m.ChatMessageMapper.countUnread    : ==> Parameters: 1(Long)
+2026-04-17T16:27:53.840+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.b.m.ChatMessageMapper.countUnread    : <==      Total: 1
+2026-04-17T16:27:54.282+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history/1
+2026-04-17T16:27:54.284+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history/1
+2026-04-17T16:27:54.284+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:54.285+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:54.286+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:54.286+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] c.a.b.m.C.findByInterlocutors            : ==>  Preparing: SELECT cm.*, u1.name as senderName, u1.email as senderEmail, u2.name as receiverName FROM chat_message cm JOIN users u1 ON cm.sender_id = u1.id LEFT JOIN users u2 ON cm.receiver_id = u2.id WHERE (cm.sender_id = ? AND cm.receiver_id = ?) OR (cm.sender_id = ? AND cm.receiver_id = ?) ORDER BY cm.timestamp ASC
+2026-04-17T16:27:54.287+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] c.a.b.m.C.findByInterlocutors            : ==> Parameters: 1(Long), 1(Long), 1(Long), 1(Long)
+2026-04-17T16:27:54.288+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] c.a.b.m.C.findByInterlocutors            : <==      Total: 4
+2026-04-17T16:27:54.295+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/read/1
+2026-04-17T16:27:54.298+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/read/1
+2026-04-17T16:27:54.299+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:54.299+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:54.300+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:54.301+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==>  Preparing: UPDATE chat_message SET is_read = TRUE WHERE sender_id = ? AND receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:54.302+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==> Parameters: 1(Long), 1(Long)
+2026-04-17T16:27:54.302+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.m.ChatMessageMapper.markAllAsRead  : <==    Updates: 0
+2026-04-17T16:27:54.308+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/unread-count
+2026-04-17T16:27:54.309+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/unread-count
+2026-04-17T16:27:54.310+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:54.310+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:54.311+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:54.312+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.m.ChatMessageMapper.countUnread    : ==>  Preparing: SELECT COUNT(*) FROM chat_message WHERE receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:54.312+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.m.ChatMessageMapper.countUnread    : ==> Parameters: 1(Long)
+2026-04-17T16:27:54.313+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.m.ChatMessageMapper.countUnread    : <==      Total: 1
+2026-04-17T16:27:54.892+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history/2
+2026-04-17T16:27:54.894+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history/2
+2026-04-17T16:27:54.895+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:54.896+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:54.896+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:54.897+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.m.C.findByInterlocutors            : ==>  Preparing: SELECT cm.*, u1.name as senderName, u1.email as senderEmail, u2.name as receiverName FROM chat_message cm JOIN users u1 ON cm.sender_id = u1.id LEFT JOIN users u2 ON cm.receiver_id = u2.id WHERE (cm.sender_id = ? AND cm.receiver_id = ?) OR (cm.sender_id = ? AND cm.receiver_id = ?) ORDER BY cm.timestamp ASC
+2026-04-17T16:27:54.897+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.m.C.findByInterlocutors            : ==> Parameters: 1(Long), 2(Long), 2(Long), 1(Long)
+2026-04-17T16:27:54.899+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.m.C.findByInterlocutors            : <==      Total: 7
+2026-04-17T16:27:54.911+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/read/2
+2026-04-17T16:27:54.913+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/read/2
+2026-04-17T16:27:54.914+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:54.914+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:54.915+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:54.916+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==>  Preparing: UPDATE chat_message SET is_read = TRUE WHERE sender_id = ? AND receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:54.916+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==> Parameters: 2(Long), 1(Long)
+2026-04-17T16:27:54.917+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.m.ChatMessageMapper.markAllAsRead  : <==    Updates: 0
+2026-04-17T16:27:54.922+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/unread-count
+2026-04-17T16:27:54.924+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/unread-count
+2026-04-17T16:27:54.925+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:54.925+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:54.925+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:54.926+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.m.ChatMessageMapper.countUnread    : ==>  Preparing: SELECT COUNT(*) FROM chat_message WHERE receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:54.927+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.m.ChatMessageMapper.countUnread    : ==> Parameters: 1(Long)
+2026-04-17T16:27:54.927+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.m.ChatMessageMapper.countUnread    : <==      Total: 1
+2026-04-17T16:27:55.208+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history/2
+2026-04-17T16:27:55.209+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history/2
+2026-04-17T16:27:55.209+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:55.210+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:55.210+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:55.212+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.m.C.findByInterlocutors            : ==>  Preparing: SELECT cm.*, u1.name as senderName, u1.email as senderEmail, u2.name as receiverName FROM chat_message cm JOIN users u1 ON cm.sender_id = u1.id LEFT JOIN users u2 ON cm.receiver_id = u2.id WHERE (cm.sender_id = ? AND cm.receiver_id = ?) OR (cm.sender_id = ? AND cm.receiver_id = ?) ORDER BY cm.timestamp ASC
+2026-04-17T16:27:55.212+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.m.C.findByInterlocutors            : ==> Parameters: 1(Long), 2(Long), 2(Long), 1(Long)
+2026-04-17T16:27:55.214+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.m.C.findByInterlocutors            : <==      Total: 7
+2026-04-17T16:27:55.220+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/read/2
+2026-04-17T16:27:55.220+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/read/2
+2026-04-17T16:27:55.222+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:55.222+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:55.222+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:55.224+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==>  Preparing: UPDATE chat_message SET is_read = TRUE WHERE sender_id = ? AND receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:55.224+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==> Parameters: 2(Long), 1(Long)
+2026-04-17T16:27:55.224+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.ChatMessageMapper.markAllAsRead  : <==    Updates: 0
+2026-04-17T16:27:55.229+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/unread-count
+2026-04-17T16:27:55.230+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/unread-count
+2026-04-17T16:27:55.231+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:55.231+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:55.232+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:55.233+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.m.ChatMessageMapper.countUnread    : ==>  Preparing: SELECT COUNT(*) FROM chat_message WHERE receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:55.233+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.m.ChatMessageMapper.countUnread    : ==> Parameters: 1(Long)
+2026-04-17T16:27:55.234+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.m.ChatMessageMapper.countUnread    : <==      Total: 1
+2026-04-17T16:27:55.694+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history/3
+2026-04-17T16:27:55.696+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history/3
+2026-04-17T16:27:55.697+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:55.697+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:55.698+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:55.698+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.b.m.C.findByInterlocutors            : ==>  Preparing: SELECT cm.*, u1.name as senderName, u1.email as senderEmail, u2.name as receiverName FROM chat_message cm JOIN users u1 ON cm.sender_id = u1.id LEFT JOIN users u2 ON cm.receiver_id = u2.id WHERE (cm.sender_id = ? AND cm.receiver_id = ?) OR (cm.sender_id = ? AND cm.receiver_id = ?) ORDER BY cm.timestamp ASC
+2026-04-17T16:27:55.698+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.b.m.C.findByInterlocutors            : ==> Parameters: 1(Long), 3(Long), 3(Long), 1(Long)
+2026-04-17T16:27:55.699+09:00 DEBUG 5232 --- [http-nio-8080-exec-3] c.a.b.m.C.findByInterlocutors            : <==      Total: 2
+2026-04-17T16:27:55.710+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/read/3
+2026-04-17T16:27:55.711+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/read/3
+2026-04-17T16:27:55.712+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:55.712+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:55.713+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:55.714+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==>  Preparing: UPDATE chat_message SET is_read = TRUE WHERE sender_id = ? AND receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:55.714+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==> Parameters: 3(Long), 1(Long)
+2026-04-17T16:27:55.715+09:00 DEBUG 5232 --- [http-nio-8080-exec-6] c.a.b.m.ChatMessageMapper.markAllAsRead  : <==    Updates: 0
+2026-04-17T16:27:55.720+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/unread-count
+2026-04-17T16:27:55.721+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/unread-count
+2026-04-17T16:27:55.722+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:55.722+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:55.723+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:55.723+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.m.ChatMessageMapper.countUnread    : ==>  Preparing: SELECT COUNT(*) FROM chat_message WHERE receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:55.724+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.m.ChatMessageMapper.countUnread    : ==> Parameters: 1(Long)
+2026-04-17T16:27:55.724+09:00 DEBUG 5232 --- [http-nio-8080-exec-9] c.a.b.m.ChatMessageMapper.countUnread    : <==      Total: 1
+2026-04-17T16:27:56.326+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history/6
+2026-04-17T16:27:56.327+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history/6
+2026-04-17T16:27:56.328+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:56.329+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:56.329+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:56.329+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.m.C.findByInterlocutors            : ==>  Preparing: SELECT cm.*, u1.name as senderName, u1.email as senderEmail, u2.name as receiverName FROM chat_message cm JOIN users u1 ON cm.sender_id = u1.id LEFT JOIN users u2 ON cm.receiver_id = u2.id WHERE (cm.sender_id = ? AND cm.receiver_id = ?) OR (cm.sender_id = ? AND cm.receiver_id = ?) ORDER BY cm.timestamp ASC
+2026-04-17T16:27:56.331+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.m.C.findByInterlocutors            : ==> Parameters: 1(Long), 6(Long), 6(Long), 1(Long)
+2026-04-17T16:27:56.331+09:00 DEBUG 5232 --- [http-nio-8080-exec-4] c.a.b.m.C.findByInterlocutors            : <==      Total: 0
+2026-04-17T16:27:56.337+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/read/6
+2026-04-17T16:27:56.337+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/read/6
+2026-04-17T16:27:56.338+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:56.338+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:56.339+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:56.340+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==>  Preparing: UPDATE chat_message SET is_read = TRUE WHERE sender_id = ? AND receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:56.340+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==> Parameters: 6(Long), 1(Long)
+2026-04-17T16:27:56.341+09:00 DEBUG 5232 --- [http-nio-8080-exec-10] c.a.b.m.ChatMessageMapper.markAllAsRead  : <==    Updates: 0
+2026-04-17T16:27:56.345+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/unread-count
+2026-04-17T16:27:56.346+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/unread-count
+2026-04-17T16:27:56.347+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:56.347+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:56.349+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:56.349+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.m.ChatMessageMapper.countUnread    : ==>  Preparing: SELECT COUNT(*) FROM chat_message WHERE receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:56.349+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.m.ChatMessageMapper.countUnread    : ==> Parameters: 1(Long)
+2026-04-17T16:27:56.350+09:00 DEBUG 5232 --- [http-nio-8080-exec-8] c.a.b.m.ChatMessageMapper.countUnread    : <==      Total: 1
+2026-04-17T16:27:56.990+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/history/1
+2026-04-17T16:27:56.991+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/history/1
+2026-04-17T16:27:56.992+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:56.992+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:56.993+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:56.994+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.m.C.findByInterlocutors            : ==>  Preparing: SELECT cm.*, u1.name as senderName, u1.email as senderEmail, u2.name as receiverName FROM chat_message cm JOIN users u1 ON cm.sender_id = u1.id LEFT JOIN users u2 ON cm.receiver_id = u2.id WHERE (cm.sender_id = ? AND cm.receiver_id = ?) OR (cm.sender_id = ? AND cm.receiver_id = ?) ORDER BY cm.timestamp ASC
+2026-04-17T16:27:56.994+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.m.C.findByInterlocutors            : ==> Parameters: 1(Long), 1(Long), 1(Long), 1(Long)
+2026-04-17T16:27:56.995+09:00 DEBUG 5232 --- [http-nio-8080-exec-5] c.a.b.m.C.findByInterlocutors            : <==      Total: 4
+2026-04-17T16:27:57.001+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/chat/read/1
+2026-04-17T16:27:57.002+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured POST /api/chat/read/1
+2026-04-17T16:27:57.003+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:57.003+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:57.004+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:57.005+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==>  Preparing: UPDATE chat_message SET is_read = TRUE WHERE sender_id = ? AND receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:57.005+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.m.ChatMessageMapper.markAllAsRead  : ==> Parameters: 1(Long), 1(Long)
+2026-04-17T16:27:57.005+09:00 DEBUG 5232 --- [http-nio-8080-exec-2] c.a.b.m.ChatMessageMapper.markAllAsRead  : <==    Updates: 0
+2026-04-17T16:27:57.010+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/chat/unread-count
+2026-04-17T16:27:57.011+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/chat/unread-count
+2026-04-17T16:27:57.012+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.mapper.UserMapper.findByEmail      : ==>  Preparing: SELECT * FROM users WHERE email = ?
+2026-04-17T16:27:57.012+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.mapper.UserMapper.findByEmail      : ==> Parameters: admin@asset.com(String)
+2026-04-17T16:27:57.013+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.mapper.UserMapper.findByEmail      : <==      Total: 1
+2026-04-17T16:27:57.013+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.ChatMessageMapper.countUnread    : ==>  Preparing: SELECT COUNT(*) FROM chat_message WHERE receiver_id = ? AND is_read = FALSE
+2026-04-17T16:27:57.014+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.ChatMessageMapper.countUnread    : ==> Parameters: 1(Long)
+2026-04-17T16:27:57.014+09:00 DEBUG 5232 --- [http-nio-8080-exec-1] c.a.b.m.ChatMessageMapper.countUnread    : <==      Total: 1
+2026-04-17T16:27:58.149+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/requests/pending
+2026-04-17T16:27:58.150+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/requests/pending
+2026-04-17T16:27:58.150+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] horizationManagerBeforeMethodInterceptor : Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.assetmanagement.backend.controller.RentalRequestController.getPendingRequests(); target is of class [com.assetmanagement.backend.controller.RentalRequestController]
+2026-04-17T16:27:58.151+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] horizationManagerBeforeMethodInterceptor : Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.assetmanagement.backend.controller.RentalRequestController.getPendingRequests(); target is of class [com.assetmanagement.backend.controller.RentalRequestController]
+2026-04-17T16:27:58.152+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.m.R.findByStatus                   : ==>  Preparing: SELECT r.*, a.name as assetName, a.serial_number as assetSerial, u.email as userEmail, u.name as userName, u.department as userDepartment, c.use_ocr as useOcr FROM rental_request r JOIN asset a ON r.asset_id = a.id JOIN category c ON a.category_id = c.id JOIN users u ON r.user_id = u.id WHERE r.status = ? ORDER BY r.request_date DESC
+2026-04-17T16:27:58.152+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.m.R.findByStatus                   : ==> Parameters: PENDING(String)
+2026-04-17T16:27:58.154+09:00 DEBUG 5232 --- [http-nio-8080-exec-7] c.a.b.m.R.findByStatus                   : <==      Total: 0
+2026-04-17T16:40:06.032+09:00  INFO 5232 --- [MessageBroker-4] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[1 current WS(1)-HttpStream(0)-HttpPoll(0), 2 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(2)-CONNECTED(2)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 15], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 3], sockJsScheduler[pool size = 16, active threads = 1, queued tasks = 3, completed tasks = 1745]

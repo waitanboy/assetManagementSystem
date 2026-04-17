@@ -1,0 +1,27 @@
+# Root .gitignore for IT Asset Management System
+
+# Logs
+**/logs/
+*.log
+*.txt
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Backend (Maven)
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+
+# Frontend (Node)
+frontend/node_modules/
+frontend/dist/
+frontend/dev-dist/
+frontend/.vscode/
+frontend/package-lock.json
