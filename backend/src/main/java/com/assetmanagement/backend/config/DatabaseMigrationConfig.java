@@ -31,10 +31,40 @@ public class DatabaseMigrationConfig {
 
             addColumnIfMissing("users", "reset_token", "VARCHAR(255)");
             addColumnIfMissing("users", "reset_token_expiry", "TIMESTAMP NULL");
+            
+            createChatMessageTable();
 
             log.info("Database migration check completed.");
         };
     }
+
+    private void createChatMessageTable() {
+        try {
+            // Check if table already exists first
+            String checkSql = "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES " +
+                              "WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'chat_message'";
+            Integer count = jdbcTemplate.queryForObject(checkSql, Integer.class);
+            if (count != null && count > 0) {
+                log.debug("Table 'chat_message' already exists, skipping creation.");
+                return;
+            }
+
+            // Create without FK constraints to avoid column type mismatch issues
+            String sql = "CREATE TABLE chat_message (" +
+                         "id INT AUTO_INCREMENT PRIMARY KEY, " +
+                         "sender_id INT NOT NULL, " +
+                         "receiver_id INT, " +
+                         "content TEXT NOT NULL, " +
+                         "timestamp DATETIME NOT NULL, " +
+                         "is_read BOOLEAN NOT NULL DEFAULT FALSE" +
+                         ")";
+            jdbcTemplate.execute(sql);
+            log.info("Table 'chat_message' created successfully.");
+        } catch (Exception e) {
+            log.error("Failed to create 'chat_message' table: {}", e.getMessage());
+        }
+    }
+
 
     private void addColumnIfMissing(String tableName, String columnName, String definition) {
         try {

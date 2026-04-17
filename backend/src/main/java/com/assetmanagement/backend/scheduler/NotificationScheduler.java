@@ -4,7 +4,8 @@ import com.assetmanagement.backend.entity.Asset;
 import com.assetmanagement.backend.entity.Transaction;
 import com.assetmanagement.backend.mapper.AssetMapper;
 import com.assetmanagement.backend.mapper.TransactionMapper;
-import com.assetmanagement.backend.service.EmailService;
+import com.assetmanagement.backend.service.ChatService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,8 @@ public class NotificationScheduler {
 
     private final AssetMapper assetMapper;
     private final TransactionMapper transactionMapper;
-    private final EmailService emailService;
+    private final ChatService chatService;
+
 
     /**
      * 메일 기능 비활성화를 위해 임시 주석 처리 (Re-enable by uncommenting @Scheduled)
@@ -37,13 +39,11 @@ public class NotificationScheduler {
                 Transaction lastTx = txs.get(0); // Assuming ordered by DESC
                 if ("RENT".equalsIgnoreCase(lastTx.getType()) && lastTx.getDueDate() != null) {
                     if (lastTx.getDueDate().isBefore(today)) {
-                        String userEmail = lastTx.getUserEmail();
-                        if (userEmail != null) {
-                            emailService.sendOverdueAlert(
-                                    userEmail, 
-                                    asset.getName(), 
-                                    lastTx.getDueDate().toString()
-                            );
+                        Long userId = lastTx.getUserId();
+                        if (userId != null) {
+                            String message = String.format("🚨 [경고] 자산 반납 기한 연체 안내\n현재 '%s' 자산의 반납 기한(%s)이 지났습니다. 즉시 반납하시거나 관리팀에 문의해 주세요.", 
+                                asset.getName(), lastTx.getDueDate().toString());
+                            chatService.sendSystemMessage(userId, message);
                             count++;
                         }
                     }
@@ -51,7 +51,7 @@ public class NotificationScheduler {
             }
         }
         
-        System.out.println("Scheduled overdue check completed. Emails sent: " + count);
+        System.out.println("Scheduled overdue check completed. Overdue assets found: " + count);
     }
     
     /**

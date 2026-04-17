@@ -6,7 +6,7 @@ spring:
     serialization:
       write-dates-as-timestamps: false
   datasource:
-    url: ${DB_URL:jdbc:mysql://localhost:3306/asset_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    url: ${DB_URL:jdbc:mysql://localhost:3306/asset_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=UTF-8}
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:admin}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -18,20 +18,6 @@ spring:
       base-url: ${OLLAMA_URL:http://localhost:11434}
       chat:
         model: qwen3-vl:8b
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: waitanboy@gmail.com
-    password: msdwrnjtggfmoyqt
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-          timeout: 5000
-          connectiontimeout: 5000
-          writetimeout: 5000
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
@@ -45,6 +31,9 @@ app:
     cookie-name: jwt_token
 
 logging:
+  file:
+    name: logs/app.log
   level:
     org.springframework.security: DEBUG
+    com.assetmanagement.backend: DEBUG
 

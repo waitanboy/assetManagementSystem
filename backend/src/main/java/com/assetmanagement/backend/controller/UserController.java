@@ -1,7 +1,7 @@
 package com.assetmanagement.backend.controller;
 
 import com.assetmanagement.backend.entity.User;
-import com.assetmanagement.backend.service.EmailService;
+
 import com.assetmanagement.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-    private final EmailService emailService;
+
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -79,18 +79,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/test-email")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<String> sendTestEmail() {
-        System.out.println("[API] sendTestEmail called");
-        Long userId = userService.getCurrentUserId();
-        User user = userService.getUserById(userId);
-        if (user != null && user.getEmail() != null) {
-            emailService.sendWelcomeEmail(user.getEmail()); // Reuse existing template for test
-            return ResponseEntity.ok("테스트 이메일이 발송 큐에 등록되었습니다: " + user.getEmail());
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("현재 사용자를 찾을 수 없거나 이메일이 없습니다.");
-    }
+
 
     @PutMapping("/profile")
     public ResponseEntity<Void> updateProfile(@RequestBody User user) {

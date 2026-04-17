@@ -28,8 +28,8 @@ public class DataInitializer implements ApplicationRunner {
         );
         log.info("----------------------------");
 
-        // 관리자 계정 처리 (기존 admin@asset.com -> waitanboy@gmail.com 업데이트 포함)
-        String targetAdminEmail = "waitanboy@gmail.com";
+        // 관리자 계정 처리 (waitanboy@gmail.com -> admin@asset.com 업데이트 포함)
+        String targetAdminEmail = "admin@asset.com";
         User oldAdmin = userMapper.findByEmail("admin@asset.com");
         User newAdmin = userMapper.findByEmail(targetAdminEmail);
 
@@ -47,14 +47,21 @@ public class DataInitializer implements ApplicationRunner {
                     .build();
             userMapper.insert(admin);
             log.info("✅ 새로운 관리자 계정이 생성되었습니다. (email: {} / password: admin123)", targetAdminEmail);
-        } else if (newAdmin != null) {
-            log.info("✅ 관리자 계정이 이미 존재합니다. (email: {})", newAdmin.getEmail());
-            // 필요한 경우 여기서 상태를 APPROVED로 강제 업데이트할 수 있습니다.
-            if (!"APPROVED".equals(newAdmin.getStatus())) {
-                newAdmin.setStatus("APPROVED");
-                userMapper.update(newAdmin);
-                log.info("관리자 계정 상태를 APPROVED로 업데이트했습니다.");
-            }
+        }
+
+        // 시스템 자동 알림용 계정 생성
+        String systemAdminEmail = "assetSysAdmin@asset.com";
+        if (userMapper.findByEmail(systemAdminEmail) == null) {
+            User sysAdmin = User.builder()
+                    .email(systemAdminEmail)
+                    .password(passwordEncoder.encode("sysadmin123"))
+                    .name("시스템 알림")
+                    .role("ADMIN")
+                    .department("SYSTEM")
+                    .status("APPROVED")
+                    .build();
+            userMapper.insert(sysAdmin);
+            log.info("✅ 시스템 자동 알림용 계정이 생성되었습니다. (email: {})", systemAdminEmail);
         }
     }
 }

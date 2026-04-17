@@ -40,6 +40,21 @@
         ORDER BY t.transaction_date DESC
     </select>
 
+    <select id="findByUserId" resultType="com.assetmanagement.backend.entity.Transaction">
+        SELECT 
+            t.*,
+            a.name as assetName,
+            a.serial_number as assetSerial,
+            u.email as userEmail,
+            u.role as userRole,
+            u.department as userDepartment
+        FROM transaction t
+        LEFT JOIN asset a ON t.asset_id = a.id
+        JOIN users u ON t.user_id = u.id
+        WHERE t.user_id = #{userId}
+        ORDER BY t.transaction_date DESC
+    </select>
+
     <!-- 현재 대여 중인 자산의 최신 RENT 트랜잭션 대여자/반납일 수정 -->
     <update id="updateLatestRent">
         UPDATE `transaction`

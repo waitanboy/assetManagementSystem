@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.assetmanagement.backend.mapper.ChatMessageMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO chat_message (sender_id, receiver_id, content, timestamp, is_read)
+        VALUES (#{senderId}, #{receiverId}, #{content}, #{timestamp}, #{isRead})
+    </insert>
+
+    <select id="findByInterlocutors" resultType="com.assetmanagement.backend.entity.ChatMessage">
+        SELECT cm.*, u1.name as senderName, u1.email as senderEmail, u2.name as receiverName
+        FROM chat_message cm
+        JOIN users u1 ON cm.sender_id = u1.id
+        LEFT JOIN users u2 ON cm.receiver_id = u2.id
+        WHERE (cm.sender_id = #{user1} AND cm.receiver_id = #{user2})
+           OR (cm.sender_id = #{user2} AND cm.receiver_id = #{user1})
+        ORDER BY cm.timestamp ASC
+    </select>
+
+    <select id="findRecentForAdmin" resultType="com.assetmanagement.backend.entity.ChatMessage">
+        SELECT cm.*, u.name as senderName, u.email as senderEmail
+        FROM chat_message cm
+        JOIN users u ON cm.sender_id = u.id
+        WHERE cm.id IN (
+            SELECT MAX(id)
+            FROM chat_message
+            WHERE receiver_id IS NOT NULL -- For simplicity, assuming receiver is always admin for now
+            GROUP BY sender_id
+        )
+        ORDER BY cm.timestamp DESC
+    </select>
+
+    <update id="markAsRead">
+        UPDATE chat_message SET is_read = TRUE WHERE id = #{messageId}
+    </update>
+
+    <update id="markAllAsRead">
+        UPDATE chat_message 
+        SET is_read = TRUE 
+        WHERE sender_id = #{senderId} AND receiver_id = #{receiverId} AND is_read = FALSE
+    </update>
+
+    <select id="countUnread" resultType="int">
+        SELECT COUNT(*) FROM chat_message WHERE receiver_id = #{receiverId} AND is_read = FALSE
+    </select>
+
+</mapper>

@@ -4,7 +4,7 @@ import com.assetmanagement.backend.entity.Transaction;
 import com.assetmanagement.backend.entity.User;
 import com.assetmanagement.backend.mapper.TransactionMapper;
 import com.assetmanagement.backend.mapper.UserMapper;
-import com.assetmanagement.backend.service.EmailService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,7 +25,8 @@ public class UserService {
     private final UserMapper userMapper;
     private final TransactionMapper transactionMapper;
     private final PasswordEncoder passwordEncoder;
-    private final EmailService emailService;
+    private final ChatService chatService;
+
 
     public Long getCurrentUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -93,8 +94,9 @@ public class UserService {
             userMapper.update(user);
             logActivity(null, "UPDATE", "User approved: " + user.getEmail());
             
-            // Send welcome email
-            emailService.sendWelcomeEmail(user.getEmail());
+            // Send system chat notification
+            chatService.sendSystemMessage(user.getId(), 
+                "🎉 환영합니다! 귀하의 계정이 관리자에 의해 승인되었습니다. 이제 시스템의 모든 기능을 이용하실 수 있습니다.");
         }
     }
 

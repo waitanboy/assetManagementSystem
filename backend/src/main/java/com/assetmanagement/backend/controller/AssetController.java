@@ -33,6 +33,12 @@ public class AssetController {
         return ResponseEntity.ok(assetService.getMyRentedAssets());
     }
 
+    @GetMapping("/user/{userId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<Asset>> getAssetsByUserId(@PathVariable Long userId) {
+        return ResponseEntity.ok(assetService.getMyRentedAssets(userId));
+    }
+
     @GetMapping("/stats")
     public ResponseEntity<Map<String, Object>> getAssetStats() {
         return ResponseEntity.ok(assetService.getAssetStats());

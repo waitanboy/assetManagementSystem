@@ -20,23 +20,7 @@ onMounted(async () => {
   transactionStore.fetchRecentTransactions(15)
 })
 
-const emailSending = ref(false)
-const emailStatus = ref<{ type: 'success' | 'error', message: string } | null>(null)
 
-const sendTestEmail = async () => {
-  emailSending.value = true
-  emailStatus.value = null
-  try {
-    const res = await api.post('/users/test-email')
-    emailStatus.value = { type: 'success', message: res.data }
-  } catch (err: any) {
-    emailStatus.value = { type: 'error', message: err.response?.data || 'Failed to send test email' }
-  } finally {
-    emailSending.value = false
-    // Hide status after 5 seconds
-    setTimeout(() => { emailStatus.value = null }, 5000)
-  }
-}
 
 const today = new Date().toISOString().split('T')[0]
 
@@ -189,44 +173,13 @@ const getTypeColor = (type: string) => {
                       <Clock class="w-2.5 h-2.5" /> Due: <span class="text-red-500 font-bold">{{ parseDateSafe(asset.dueDate) }}</span>
                    </p>
                 </div>
-                <button class="p-1.5 text-blue-500 hover:bg-blue-50 rounded-lg transition-colors" title="Contact User">
-                   <Mail class="w-4 h-4" />
-                </button>
+
               </div>
             </div>
           </div>
         </div>
 
-        <!-- System Diagnostics (Admins only) -->
-        <div class="bg-indigo-50/30 rounded-2xl border border-indigo-100 p-6 space-y-4">
-          <div>
-            <h4 class="text-sm font-black text-indigo-900 flex items-center gap-2">
-              <Mail class="w-4 h-4" /> System Utilities
-            </h4>
-            <p class="text-[10px] text-indigo-400 mt-1 uppercase font-bold tracking-tight">Admin Diagnostics</p>
-          </div>
-          
-          <button 
-            @click="sendTestEmail"
-            :disabled="emailSending"
-            class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white border border-indigo-200 rounded-xl text-xs font-bold text-indigo-600 hover:bg-indigo-600 hover:text-white disabled:opacity-50 disabled:hover:bg-white disabled:hover:text-indigo-600 transition-all shadow-sm active:scale-95"
-          >
-            <RotateCcw v-if="emailSending" class="w-4 h-4 animate-spin" />
-            <Mail v-else class="w-4 h-4" />
-            {{ emailSending ? 'Sending...' : 'Send Test Email' }}
-          </button>
 
-          <transition enter-active-class="transition duration-300" enter-from-class="opacity-0 -translate-y-2" leave-active-class="transition duration-200" leave-to-class="opacity-0 translate-y-1">
-            <div v-if="emailStatus" :class="[
-              'p-3 rounded-lg text-[10px] font-bold flex items-center gap-2',
-              emailStatus.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-            ]">
-              <CheckCircle v-if="emailStatus.type === 'success'" class="w-3 h-3" />
-              <AlertTriangle v-else class="w-3 h-3" />
-              {{ emailStatus.message }}
-            </div>
-          </transition>
-        </div>
       </div>
 
       <!-- Right: Recent Activity -->

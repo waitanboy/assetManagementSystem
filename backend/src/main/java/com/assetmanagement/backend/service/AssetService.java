@@ -22,7 +22,8 @@ public class AssetService {
     private final TransactionMapper transactionMapper;
     private final RepairLogMapper repairLogMapper;
     private final UserService userService;
-    private final EmailService emailService;
+    private final ChatService chatService;
+
 
     @Transactional(readOnly = true)
     public List<Asset> getAllAssets(String search, String status, Long categoryId) {
@@ -42,6 +43,11 @@ public class AssetService {
     @Transactional(readOnly = true)
     public List<Asset> getMyRentedAssets() {
         Long userId = userService.getCurrentUserId();
+        return getMyRentedAssets(userId);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Asset> getMyRentedAssets(Long userId) {
         if (userId == null) {
             return new ArrayList<>();
         }
@@ -114,15 +120,14 @@ public class AssetService {
                 .build();
         transactionMapper.insert(transaction);
 
-        // Send confirmation email
+        // Send system chat notification
         try {
-            com.assetmanagement.backend.entity.User user = userService.getUserById(userId);
-            if (user != null && user.getEmail() != null) {
-                String dateStr = dueDate != null ? dueDate.toString() : "미지정";
-                emailService.sendRentalConfirmation(user.getEmail(), asset.getName(), dateStr);
-            }
+            String dateStr = dueDate != null ? dueDate.toString() : "미지정";
+            String message = String.format("📢 자산 대여 안내\n- 대여 자산: %s\n- 반납 예정일: %s\n안전하게 사용 후 기한 내 반납 부탁드립니다.", 
+                asset.getName(), dateStr);
+            chatService.sendSystemMessage(userId, message);
         } catch (Exception e) {
-            System.err.println("Failed to trigger rental email: " + e.getMessage());
+            System.err.println("Failed to send rental chat notification: " + e.getMessage());
         }
     }
 

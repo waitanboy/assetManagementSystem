@@ -9,9 +9,9 @@ import java.util.List;
 @Mapper
 public interface TransactionMapper {
     void insert(Transaction transaction);
-    List<Transaction> findRecent(int limit);
-    List<Transaction> findByAssetId(Long assetId);
-    // 현재 대여 중인 자산의 최신 RENT 트랜잭션 대여자/반납일 수정
+    List<Transaction> findRecent(@Param("limit") int limit);
+    List<Transaction> findByAssetId(@Param("assetId") Long assetId);
+    List<Transaction> findByUserId(@Param("userId") Long userId);
     void updateLatestRent(@Param("assetId") Long assetId,
                           @Param("newUserId") Long newUserId,
                           @Param("newDueDate") LocalDate newDueDate);

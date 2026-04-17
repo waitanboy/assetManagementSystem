@@ -67,15 +67,33 @@ const router = createRouter({
           meta: { requiresRole: 'ADMIN' },
         },
         {
-          path: 'transactions',
-          name: 'Transactions',
+          path: 'users/:id',
+          name: 'User Details',
+          component: () => import('../views/UserDetailView.vue'),
+          meta: { requiresRole: 'ADMIN' },
+        },
+        {
+          path: 'logs',
+          name: 'Activity Logs',
           component: () => import('../views/TransactionListView.vue'),
+          meta: { requiresRole: 'ADMIN' },
+        },
+        {
+          path: 'system/console',
+          name: 'System Console',
+          component: () => import('../views/SystemConsoleView.vue'),
           meta: { requiresRole: 'ADMIN' },
         },
         {
           path: 'repairs',
           name: 'Maintenance',
           component: () => import('../views/MaintenanceView.vue'),
+          meta: { requiresRole: 'ADMIN' },
+        },
+        {
+          path: 'transactions',
+          name: 'Transactions',
+          component: () => import('../views/TransactionListView.vue'),
           meta: { requiresRole: 'ADMIN' },
         },
         {
@@ -87,6 +105,22 @@ const router = createRouter({
           path: 'requests',
           name: 'Rental Requests',
           component: () => import('../views/RentalRequestView.vue'),
+        },
+        {
+          path: 'support',
+          name: 'Support Chat',
+          component: () => import('../views/AdminChatView.vue'),
+          meta: { requiresRole: 'ADMIN' },
+        },
+        {
+          path: 'board',
+          name: 'Community Board',
+          component: () => import('../views/BoardListView.vue'),
+        },
+        {
+          path: 'board/:id',
+          name: 'Board Detail',
+          component: () => import('../views/BoardDetailView.vue'),
         },
       ],
     },

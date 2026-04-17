@@ -8,12 +8,13 @@ import java.util.List;
 @Mapper
 public interface AssetMapper {
     List<Asset> findAll(@Param("search") String search, @Param("status") String status, @Param("categoryId") Long categoryId);
-    Asset findById(Long id);
+    Asset findById(@Param("id") Long id);
     void insert(Asset asset);
     void insertBulk(@Param("assets") List<Asset> assets);
     void update(Asset asset);
-    void delete(Long id);
+    void delete(@Param("id") Long id);
     java.util.Map<String, Object> getAssetStats();
     List<Asset> findMyRentedAssets(@Param("userId") Long userId);
-    int countByCategoryId(Long categoryId);
+    List<Asset> findOverdueAssets();
+    int countByCategoryId(@Param("categoryId") Long categoryId);
 }

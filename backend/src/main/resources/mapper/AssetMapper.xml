@@ -78,14 +78,26 @@
     <select id="findMyRentedAssets" resultType="com.assetmanagement.backend.entity.Asset">
         SELECT a.*, t.due_date as dueDate
         FROM asset a
+        JOIN `transaction` t ON a.id = t.asset_id
+        WHERE a.status = 'RENTED'
+          AND a.use_yn = 'Y'
+          AND t.user_id = #{userId}
+          AND t.type = 'RENT'
+          AND t.id = (SELECT MAX(id) FROM `transaction` WHERE asset_id = a.id)
+    </select>
+
+    <select id="findOverdueAssets" resultType="com.assetmanagement.backend.entity.Asset">
+        SELECT a.*, u.email as rentedByEmail, u.id as rentedByUserId, t.due_date as dueDate
+        FROM asset a
         JOIN (
-            SELECT asset_id, MAX(id) as latest_tx_id 
-            FROM `transaction` 
+            SELECT asset_id, MAX(id) AS latest_tx_id
+            FROM `transaction`
             WHERE type = 'RENT'
             GROUP BY asset_id
-        ) latest ON a.id = latest.asset_id
+        ) latest ON a.id = latest.asset_id AND a.status = 'RENTED'
         JOIN `transaction` t ON t.id = latest.latest_tx_id
-        WHERE t.user_id = #{userId} AND t.type = 'RENT' AND a.status = 'RENTED' AND a.use_yn = 'Y'
+        JOIN users u ON t.user_id = u.id
+        WHERE t.due_date &lt; CURRENT_DATE AND a.use_yn = 'Y'
     </select>
 
     <select id="countByCategoryId" resultType="int">
